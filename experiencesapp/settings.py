@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main_app',
+    'crispy_forms',
     'languages',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,6 +122,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Where uploaded files will be stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Access the image in the browser
+MEDIA_URL = '/media/'
+
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
+
