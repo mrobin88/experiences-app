@@ -20,6 +20,7 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+
 #------ PROFILE ------
 @login_required
 def profile(request):

@@ -1,8 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 from PIL import Image
+from datetime import date
+from languages.fields import LanguageField
 
 #----- PROFILE ------
 class Profile(models.Model):
@@ -21,11 +25,6 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
-
-from datetime import date
-from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
-from languages.fields import LanguageField
 
 # Create your models here.
 class City(models.Model):
