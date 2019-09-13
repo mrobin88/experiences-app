@@ -1,9 +1,10 @@
-from django.contrib.auth import login 
+from django.contrib.auth import login
+from django.views.generic import DetailView
 from django.shortcuts import render, redirect
-from django.views.generic.list import ListView 
-from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, DeleteView
 
 from .models import Experience
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
@@ -52,8 +53,6 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
     fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language']
     template_name = 'experiences/form.html'
-    # change the following to a model get_absolute_url method once detail route and page is set up
-    success_url = '/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -64,3 +63,11 @@ class ExperienceList(ListView):
     context_object_name = 'experiences'
     template_name = 'experiences/index.html'
 
+class ExperienceDetail(LoginRequiredMixin, DetailView):
+    model = Experience
+    template_name = 'experiences/show.html'
+
+class ExperienceDelete(LoginRequiredMixin, DeleteView):
+    model = Experience
+    template_name = 'experiences/confirm_delete.html'
+    success_url = '/'
