@@ -14,7 +14,10 @@
                 <p>Language Spoken: {{ experience.language.upper }}</p>
                 <p>Host: {{ experience.user }}</p>
             </div>
+
+
             <div class="card-action">
+                <a href="{% url 'exp_update' experience.id %}">Edit</a>
                 <a href="{% url 'exp_delete' experience.id %}">Delete</a>
             </div>
         </div>
