@@ -51,3 +51,7 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
     template_name = 'experiences/form.html'
     # change the following to a model get_absolute_url method once detail route and page is set up
     success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
