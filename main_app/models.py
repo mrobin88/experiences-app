@@ -1,8 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 from PIL import Image
+from datetime import date
+from languages.fields import LanguageField
 
 #----- PROFILE ------
 class Profile(models.Model):
@@ -22,12 +27,6 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-from datetime import date
-from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
-from languages.fields import LanguageField
-
-# Create your models here.
 class City(models.Model):
     location = models.CharField(max_length=60)
 
@@ -45,6 +44,9 @@ class Experience(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse('exp_detail', kwargs = { 'pk': self.id })
 
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

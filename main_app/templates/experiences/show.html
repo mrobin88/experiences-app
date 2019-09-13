@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Experience Details</h1>
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ experience.title }}</span>
+                <p>Description: {{ experience.description }}</p>
+                <p>Price: ${{ experience.price }}</p>
+                <p>Location: {{ experience.location }}</p>
+                <p>Time: {{ experience.hours }}:{{ experience.minutes }}</p>
+                <p>Language Spoken: {{ experience.language.upper }}</p>
+                <p>Host: {{ experience.user }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
