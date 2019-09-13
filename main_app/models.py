@@ -1,10 +1,5 @@
 from django.db import models
-<<<<<<< HEAD
-||||||| merged common ancestors
-from django.contrib.auth.models import User
-=======
 from django.urls import reverse
->>>>>>> d96c9fa69212628351b132e664142d90e090b058
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
@@ -32,17 +27,7 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-<<<<<<< HEAD
 # ---- CITY ------
-||||||| merged common ancestors
-from datetime import date
-from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
-from languages.fields import LanguageField
-
-# Create your models here.
-=======
->>>>>>> d96c9fa69212628351b132e664142d90e090b058
 class City(models.Model):
     location = models.CharField(max_length=60)
 

@@ -1,26 +1,12 @@
 from django.contrib.auth import login 
-<<<<<<< HEAD
-from django.views.generic.edit import CreateView, UpdateView
-||||||| merged common ancestors
-from django.views.generic.edit import CreateView
-=======
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.shortcuts import render, redirect
->>>>>>> d96c9fa69212628351b132e664142d90e090b058
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-<<<<<<< HEAD
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import Experience, Profile, City, Booking, Review
-||||||| merged common ancestors
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from .models import Experience
-=======
-from django.views.generic.edit import CreateView, DeleteView
-
-from .models import Experience
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
->>>>>>> d96c9fa69212628351b132e664142d90e090b058
 
 def home(request):
     return render(request, 'home.html')
@@ -71,14 +57,11 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-<<<<<<< HEAD
 
 class ExperienceUpdate(UpdateView):
     model = Experience
     fields = '__all__'
     template_name = 'experiences/form.html'
-||||||| merged common ancestors
-=======
 
 class ExperienceDetail(LoginRequiredMixin, DetailView):
     model = Experience
@@ -88,4 +71,3 @@ class ExperienceDelete(LoginRequiredMixin, DeleteView):
     model = Experience
     template_name = 'experiences/confirm_delete.html'
     success_url = '/'
->>>>>>> d96c9fa69212628351b132e664142d90e090b058
