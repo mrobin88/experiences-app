@@ -27,9 +27,11 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
+# ---- CITY ------
 class City(models.Model):
     location = models.CharField(max_length=60)
 
+# ---- EXPERIENCE ------
 class Experience(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
@@ -48,10 +50,12 @@ class Experience(models.Model):
     def get_absolute_url(self):
         return reverse('exp_detail', kwargs = { 'pk': self.id })
 
+# ---- BOOKING ------
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
 
+# ---- REVIEW ------
 class Review(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
     rating = models.IntegerField(validators=[MinValueValidator(1) , MaxValueValidator(5)])
