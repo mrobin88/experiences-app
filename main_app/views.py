@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
@@ -45,6 +45,8 @@ def profile(request):
     }
     return render(request, 'registration/profile.html', context)
 
+#----- EXPERIENCE ---------
+
 class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
     fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language']
@@ -55,3 +57,8 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+class ExperienceUpdate(UpdateView):
+    model = Experience
+    fields = '__all__'
+    template_name = 'experiences/form.html'
