@@ -16,6 +16,7 @@ class Review(models.Model):
 
 class City:
     location = models.CharField(max_length=60)
+    
 
 
     
