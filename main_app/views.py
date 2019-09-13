@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login 
-from django .contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .models import Experience
 
 def home(request):
     return render(request, 'home.html')
@@ -41,3 +44,14 @@ def profile(request):
         'p_form': p_form
     }
     return render(request, 'registration/profile.html', context)
+
+class ExperienceCreate(LoginRequiredMixin, CreateView):
+    model = Experience
+    fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language']
+    template_name = 'experiences/form.html'
+    # change the following to a model get_absolute_url method once detail route and page is set up
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)

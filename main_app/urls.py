@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('accounts/signup/', views.signup, name='signup'),
     path('accounts/profile/', views.profile, name='profile'),
+    path('experiences/create/', views.ExperienceCreate.as_view(), name='exp_create'),
 ]
 
 if settings.DEBUG:
