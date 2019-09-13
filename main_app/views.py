@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from .models import Experience
+from .models import Experience, Profile, City, Booking, Review
 
 def home(request):
     return render(request, 'home.html')
