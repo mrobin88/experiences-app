@@ -32,12 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main_app',
-<<<<<<< HEAD
     'crispy_forms',
-||||||| merged common ancestors
-=======
     'languages',
->>>>>>> f893687214bfa6c1de047f92cd3417540f85087d
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -84,6 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'experiencesapp',
+        'USER': 'postgres',
+        'PASSWORD': 'razanakotoM2@',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
