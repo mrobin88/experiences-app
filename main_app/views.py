@@ -49,3 +49,5 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
     fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language']
     template_name = 'experiences/form.html'
+    # change the following to a model get_absolute_url method once detail route and page is set up
+    success_url = '/'
