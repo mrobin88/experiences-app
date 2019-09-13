@@ -1,9 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <h1>Experiences</h1>
 <hr />
 <p>Welcome to the Experiences!</p>
 
+<div class="carousel" id="demo-carousel">
+    <a class="carousel-item" href="#one!"><img src="Images/test.jpeg"></a>
+    <a class="carousel-item" href="#two!"><img src="https://images.pexels.com/photos/258210/pexels-photo-258210.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></a>
+    <a class="carousel-item" href="#three!"><img src="https://images.pexels.com/photos/258209/pexels-photo-258209.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"></a>
+    <a class="carousel-item" href="#four!"><img src="https://images.pexels.com/photos/783340/pexels-photo-783340.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"></a>
+    <a class="carousel-item" href="#five!"><img src="https://images.pexels.com/photos/1126374/pexels-photo-1126374.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"></a>
+  </div> 
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#demo-carousel').carousel();
+        });
+</script>
 
 {% endblock %}

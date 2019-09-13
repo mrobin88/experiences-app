@@ -1,12 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-from PIL import Image
-
-from datetime import date
-
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+from PIL import Image
+from datetime import date
 from languages.fields import LanguageField
 
 #----- PROFILE ------
