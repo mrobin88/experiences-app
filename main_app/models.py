@@ -1,8 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator
+from datetime import date
+from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 from languages.fields import LanguageField
 
+# Create your models here.
+class City(models.Model):
+    location = models.CharField(max_length=60)
 
 class Experience(models.Model):
     title = models.CharField(max_length=100)
@@ -18,3 +23,15 @@ class Experience(models.Model):
     
     def __str__(self):
         return self.title
+
+class Booking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
+
+class Review(models.Model):
+    experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
+    rating = models.IntegerField(validators=[MinValueValidator(1) , MaxValueValidator(5)])
+    comment = models.TextField(max_length=250)
+
+    
+
