@@ -13,6 +13,7 @@ urlpatterns = [
     path('experiences/<int:pk>/update/', views.ExperienceUpdate.as_view(), name='exp_update'),
     path('experiences/<int:pk>/', views.ExperienceDetail.as_view(), name='exp_detail'),
     path('experiences/<int:pk>/delete/', views.ExperienceDelete.as_view(), name='exp_delete'),
+    path('experiences/<int:pk>/review/', views.ExperienceReview.as_view(), name='exp_review'),
 ]
 
 if settings.DEBUG:

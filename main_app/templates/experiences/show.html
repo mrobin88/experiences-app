@@ -15,7 +15,6 @@
                 <p>Host: {{ experience.user }}</p>
             </div>
 
-
             <div class="card-action">
                 <a href="{% url 'exp_update' experience.id %}">Edit</a>
                 <a href="{% url 'exp_delete' experience.id %}">Delete</a>
@@ -23,4 +22,5 @@
         </div>
     </div>
 </div>
+<a href="{%url 'exp_review' experience.id %}">Review this Event</a>
 {% endblock %}
