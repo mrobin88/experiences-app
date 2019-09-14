@@ -1,11 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Experiences</h1>
 <ul>
-{% for experiance in object_list %}
-    <li>{{ experiance.title }} </li>
+{% for experience in object_list %}
+    <li>
+        <a href="{% url 'exp_detail' experience.id %}">{{ experience.title }}</a>
+    </li>
 {% empty %}
-    <li>No Experiances Yet. :(</li>
+    <li>No Experiences Yet. :(</li>
 {% endfor %}
 </ul>
+{% endblock %}
 
 
 
