@@ -19,6 +19,9 @@
                 <a href="{% url 'exp_update' experience.id %}">Edit</a>
                 <a href="{% url 'exp_delete' experience.id %}">Delete</a>
             </div>
+            <div class="card-action">
+                <a href="{% url 'bkng_new' experience.id %}">Book this Experience!</a>
+            </div>
         </div>
     </div>
 </div>

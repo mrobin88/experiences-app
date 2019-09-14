@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Add Booking</h1>
+
+<form action="{% url 'bkng_create' experience.id %}" method="POST">
+    {% csrf_token %}
+    <p>Confirm Booking for {{ experience.title }}?</p>
+    <input type="submit" value="Submit!" class="btn">
+    <a href="{% url 'exp_detail' experience.id %}">Cancel</a>
+</form>
+
+{% endblock %}

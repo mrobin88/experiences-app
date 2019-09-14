@@ -60,7 +60,11 @@ class Booking(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Booking by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
+        return f'Booking ({self.id}) by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
+
+    def get_absolute_url(self):
+        return reverse('bkng_show', kwargs = { 'exp_id': self.experience_id, 'bkng_id': self.id })
+
 
 # ---- REVIEW ------
 class Review(models.Model):

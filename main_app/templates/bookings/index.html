@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Bookings List</h1>
+    {% for booking in bookings %}
+<a href="{% url 'bkng_show' booking.experience_id booking.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ booking.experience.title }}</span>
+        </div>
+    </div>
+</a>
+    {% endfor %}
+{% endblock %}
