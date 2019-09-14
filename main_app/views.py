@@ -76,3 +76,9 @@ class ExperienceDelete(LoginRequiredMixin, DeleteView):
     model = Experience
     template_name = 'experiences/confirm_delete.html'
     success_url = '/'
+
+class ExperienceReview(LoginRequiredMixin, CreateView):
+    model = Review
+    fields = ['rating','comment                                                                                                                                                                                                                                                                                                 ']
+    template_name = 'experiences/review.html'
+
