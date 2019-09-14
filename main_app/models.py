@@ -15,7 +15,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return f"{self.user.username}'s Profile ({self.id})"
 
     def save(self):
         super().save()
@@ -31,6 +31,9 @@ class Profile(models.Model):
 class City(models.Model):
     location = models.CharField(max_length=60)
 
+    def __str__(self):
+        return f'{self.location} ({self.id})'
+
 # ---- EXPERIENCE ------
 class Experience(models.Model):
     title = models.CharField(max_length=100)
@@ -45,7 +48,7 @@ class Experience(models.Model):
     # add the city property (foreign key) once the city model is set up
     
     def __str__(self):
-        return self.title
+        return f'{self.title} ({self.id})'
     
     def get_absolute_url(self):
         return reverse('exp_detail', kwargs = { 'pk': self.id })
@@ -55,10 +58,16 @@ class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'Booking by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
+
 # ---- REVIEW ------
 class Review(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
     rating = models.IntegerField(validators=[MinValueValidator(1) , MaxValueValidator(5)])
     comment = models.TextField(max_length=250)
 
-    
+    def __str__(self):
+        return f'Review by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
+
