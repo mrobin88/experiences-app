@@ -14,6 +14,11 @@ urlpatterns = [
     path('experiences/<int:pk>/', views.ExperienceDetail.as_view(), name='exp_detail'),
     path('experiences/<int:pk>/delete/', views.ExperienceDelete.as_view(), name='exp_delete'),
     path('experiences/<int:pk>/review/', views.ExperienceReview.as_view(), name='exp_review'),
+    path('experiences/<int:exp_id>/bookings/new/', views.bookingNew, name='bkng_new'),
+    path('experiences/<int:exp_id>/bookings/create/', views.bookingCreate, name='bkng_create'),
+    path('bookings/', views.BookingList.as_view(), name='bkng_list'),
+    path('experiences/<int:exp_id>/bookings/<int:bkng_id>/', views.bookingShow, name='bkng_show'),
+    path('bookings/<int:pk>/delete/', views.BookingDelete.as_view(), name='bkng_delete'),
 ]
 
 if settings.DEBUG:
