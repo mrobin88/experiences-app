@@ -55,6 +55,7 @@ class Experience(models.Model):
 
 # ---- BOOKING ------
 class Booking(models.Model):
+    # user in this case is equal to the experience participant
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
 

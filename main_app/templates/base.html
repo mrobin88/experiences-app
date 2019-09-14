@@ -25,6 +25,7 @@
                 </ul>
                 <ul class="right">
                     <li><a href="/admin/">Admin</a></li>
+                    <li><a href="{% url 'experiences-list' %}">See All Experiences</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'exp_create' %}">Add an Experience</a></li>
                     <li><a href="{% url 'profile' %}">Profile</a></li>
