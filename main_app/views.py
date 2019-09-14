@@ -1,12 +1,12 @@
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
-from django.views.generic import DetailView
 from django.shortcuts import render, redirect
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 from .models import Experience, Profile, City, Booking, Review
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 def home(request):
     return render(request, 'home.html')
@@ -79,6 +79,6 @@ class ExperienceDelete(LoginRequiredMixin, DeleteView):
 
 class ExperienceReview(LoginRequiredMixin, CreateView):
     model = Review
-    fields = ['rating','comment                                                                                                                                                                                                                                                                                                 ']
+    fields = ['rating', 'comment']
     template_name = 'experiences/review.html'
 
