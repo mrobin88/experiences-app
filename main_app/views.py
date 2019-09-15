@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Experience, Profile, City, Booking, Review
+from .models import Experience, Profile, Booking, Review
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
 
 def home(request):
@@ -51,7 +51,7 @@ def profile(request):
 #----- EXPERIENCE ---------
 class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
-    fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language']
+    fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language', 'city']
     template_name = 'experiences/form.html'
 
     def form_valid(self, form):
@@ -113,7 +113,7 @@ def bookingCreate(request, exp_id):
 class BookingDelete(LoginRequiredMixin, DeleteView):
     model = Booking
     template_name = 'bookings/confirm_delete.html'
-    success_url = '/experiences/'
+    success_url = '/bookings/'
 
 class BookingList(LoginRequiredMixin, ListView):
     context_object_name = 'bookings'

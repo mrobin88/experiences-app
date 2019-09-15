@@ -7,7 +7,8 @@
 <form action="{% url 'bkng_create' experience.id %}" method="POST">
     {% csrf_token %}
     {{ booking_form.as_p }}
-    <p>Confirm Booking for {{ experience.title }}?</p>
+    <p>Price: <span class="teal-text">${{ experience.price }}</span></p>
+    <p>Confirm Booking for <span class="teal-text">{{ experience.title }}</span> hosted by <span class="teal-text">{{ experience.user.username.capitalize }}</span>?</p>
     <input type="submit" value="Submit!" class="btn">
     <a href="{% url 'exp_detail' experience.id %}">Cancel</a>
 </form>

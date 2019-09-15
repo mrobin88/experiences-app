@@ -7,12 +7,12 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-title">{{ experience.title }}</span>
-                <p>Description: {{ experience.description }}</p>
+                <p>Description: {{ experience.description.capitalize }}</p>
                 <p>Price: ${{ experience.price }}</p>
-                <p>Location: {{ experience.location }}</p>
-                <p>Time: {{ experience.hours }}:{{ experience.minutes }}</p>
-                <p>Language Spoken: {{ experience.language.upper }}</p>
-                <p>Host: {{ experience.user }}</p>
+                <p>Location: {{ experience.location.capitalize }}</p>
+                <p>Time: {{ experience.hours|stringformat:"02d" }}:{{ experience.minutes|stringformat:"02d" }}</p>
+                <p>Language Spoken: {{ experience.language }}</p>
+                <p>Host: {{ experience.user.username.capitalize }}</p>
             </div>
 
             <div class="card-action">
