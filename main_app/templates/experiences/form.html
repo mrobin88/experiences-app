@@ -17,7 +17,9 @@
 </form>
 
 <script>
-    var selectEl = document.getElementById('id_language');
-    M.FormSelect.init(selectEl);
+    M.FormSelect.init(document.getElementById('id_hours'));
+    M.FormSelect.init(document.getElementById('id_minutes'));
+    M.FormSelect.init(document.getElementById('id_language'));
+    M.FormSelect.init(document.getElementById('id_city'));
 </script>
 {% endblock %}

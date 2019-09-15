@@ -6,9 +6,19 @@
 
 <form action="{% url 'bkng_create' experience.id %}" method="POST">
     {% csrf_token %}
-    <p>Confirm Booking for {{ experience.title }}?</p>
+    {{ booking_form.as_p }}
+    <p>Price: <span class="teal-text">${{ experience.price }}</span></p>
+    <p>Confirm Booking for <span class="teal-text">{{ experience.title }}</span> hosted by <span class="teal-text">{{ experience.user.username.capitalize }}</span>?</p>
     <input type="submit" value="Submit!" class="btn">
     <a href="{% url 'exp_detail' experience.id %}">Cancel</a>
 </form>
-
+<script>
+    var dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+</script>
 {% endblock %}
