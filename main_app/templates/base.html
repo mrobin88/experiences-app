@@ -1,47 +1,70 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Experiences</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>Experiences</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="bootstrap.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        <!--- google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">
+
+        <!-- MDBootstrap Cards Extended Pro  -->
+        <link href="css/addons-pro/cards-extended.min.css" rel="stylesheet">
+
+        <!-----PoP Up Bootstrap ---->
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+        <!-- Optional JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    </head>
+
+    <body>
+        <div>
+            <nav class="navbar navbar-dark navbar-expand-md bg-dark">
+                <div class="container">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        {% if user.is_authenticated %}
+                        <a style="font-family: 'Satisfy'" class="navbar-brand" href="{% url 'home' %}">Experiences</a> 
+                        
+                        <ul class="navbar-nav ml-auto"> 
+                            <li class="nav-item"><a class="nav-link" href="{% url 'exp_create' %}"><i class="fa fa-home"></i>   Host Experiences</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}"><i class="fa fa-user"></i>   Account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>  Log Out </a></li>
+                        </ul>
+                        {% else %} 
+                        <a style="font-family: 'Satisfy'" class="navbar-brand" href="{% url 'experiences-list' %}">Experiences</a> 
+                        <ul class="navbar-nav ml-auto"> 
+                            <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i>   Sign Up</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>  Login</a></li>  
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
   
-    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-</head>
-
-<body>
-    <header class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper">
-                <ul>
-                    <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Experiences</a></li>
-                </ul>
-                <ul class="right">
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'exp_create' %}">Add an Experience</a></li>
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
-                    <li><a href="{% url 'logout' %}">Log Out</a></li>
-                    {% else %}
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                    <li><a href="{% url 'login' %}">Log In</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main class="container">
-        {% block content %}
-        {% endblock %}
-    </main>
-    <footer class="page-footer">
-        <div class="right">All Rights Reserved, &copy; 2019 Experiences &nbsp;</div>
-    </footer>
-</body>
+    {% block content %}
+    {% endblock %}
+    </body>
+    
+    <div class="footer text-center bg-dark" style="color: white; height: 70px; padding: 20px;">
+        All Rights Reserved, © 2019 Experiences 
+    </div>
 </html>

@@ -1,30 +1,36 @@
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
+from django.contrib.auth.models import User
+
 from django.views.generic import DetailView
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.views.generic.list import ListView
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+
 from .models import Experience, Profile, City, Booking, Review
+
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 def home(request):
     return render(request, 'home.html')
 
 def signup(request):
-    error_message = ''
+    error_message=''
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect('experiences-list')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserRegisterForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
-
 
 #------ PROFILE ------
 @login_required
@@ -36,6 +42,7 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
+            messages.success(request, f'Your account has been created')
             return redirect('profile')
 
     else:
