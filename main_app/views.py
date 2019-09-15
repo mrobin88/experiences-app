@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Experience, Profile, City, Booking, Review
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
 
 def home(request):
     return render(request, 'home.html')
@@ -85,8 +85,10 @@ class ExperienceReview(LoginRequiredMixin, CreateView):
 @login_required
 def bookingNew(request, exp_id):
     experience = Experience.objects.get(id=exp_id)
+    booking_form = BookingForm
     return render(request, 'bookings/new.html', {
-        'experience': experience
+        'experience': experience,
+        'booking_form': booking_form
     })
 
 @login_required
@@ -100,9 +102,13 @@ def bookingShow(request, exp_id, bkng_id):
 
 @login_required
 def bookingCreate(request, exp_id):
-    experience = Experience.objects.get(id=exp_id)
-    booking = Booking.objects.create(user_id=request.user.id, experience_id=exp_id)
-    return redirect('bkng_show', exp_id=exp_id, bkng_id=booking.id)
+    form = BookingForm(request.POST)
+    if form.is_valid():
+        new_booking = form.save(commit=False)
+        new_booking.experience_id = exp_id
+        new_booking.user_id = request.user.id
+        new_booking.save()
+    return redirect('bkng_list')
 
 class BookingDelete(LoginRequiredMixin, DeleteView):
     model = Booking

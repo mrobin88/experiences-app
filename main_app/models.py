@@ -41,11 +41,18 @@ class Experience(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     location = models.CharField(max_length=100)
     hours = models.IntegerField(validators=[MaxValueValidator(24)])
-    minutes = models.IntegerField(validators=[MaxValueValidator(60)])
-    language = LanguageField()
+    minutes = models.IntegerField(choices=(
+            (0, '00'),
+            (15, '15'),
+            (30, '30'),
+            (45, '45'),
+        ),
+        default=0
+    )
+    language = LanguageField(default='en')
     # user in this case is equal to the experience host
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # add the city property (foreign key) once the city model is set up
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
     
     def __str__(self):
         return f'{self.title} ({self.id})'
@@ -58,12 +65,16 @@ class Booking(models.Model):
     # user in this case is equal to the experience participant
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
+    date = models.DateField('booking date')
 
     def __str__(self):
         return f'Booking ({self.id}) by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
 
     def get_absolute_url(self):
         return reverse('bkng_show', kwargs = { 'exp_id': self.experience_id, 'bkng_id': self.id })
+    
+    class Meta:
+        ordering = ['date']
 
 
 # ---- REVIEW ------
