@@ -22,7 +22,7 @@
                         <p><span style="font-weight: bold">Location:</span> {{ experience.location.capitalize }}</p>
                         <p><span style="font-weight: bold">Time:</span> {{ experience.hours|stringformat:"02d" }}:{{ experience.minutes|stringformat:"02d" }}</p>
                         <p><span style="font-weight: bold">Language Spoken:</span> {{ experience.language }}</p>
-                        <p><span style="font-weight: bold">Host:</span> {{ experience.user.capitalize }}</p>
+                        <p><span style="font-weight: bold">Host:</span> {{ experience.user.username.capitalize }}</p>
                         <p><span style="font-weight: bold">City:</span> {{ experience.city }}</p>
                         <hr>
                         <!-- Button -->
