@@ -1,8 +1,8 @@
 from django import forms 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
 from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
+from .models import Profile, Booking
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -41,3 +41,7 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['image']
 
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['date']

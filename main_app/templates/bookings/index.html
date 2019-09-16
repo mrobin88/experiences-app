@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Bookings List</h1>
+    {% for booking in bookings %}
+<a href="{% url 'bkng_show' booking.experience_id booking.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title left">{{ booking.experience.title }}</span>
+            <span class="card-title right">{{ booking.date }}</span>
+        </div>
+    </div>
+</a>
+    {% empty %}
+    <h3>You haven't booked any experiences yet.</h3>
+    {% endfor %}
+{% endblock %}

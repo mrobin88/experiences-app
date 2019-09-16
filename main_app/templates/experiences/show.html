@@ -30,8 +30,11 @@
                     <a style="color:red;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_delete' experience.id %}">Delete</a>
                 </div>
             </div>
+            <div class="card-action">
+                <a href="{% url 'bkng_new' experience.id %}">Book this Experience!</a>
+            </div>
         </div>
     </div>
-    </div>
-
+</div>
+<a href="{%url 'exp_review' experience.id %}">Review this Event</a>
 {% endblock %}
