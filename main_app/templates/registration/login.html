@@ -1,13 +1,43 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 
-<h1>Log In</h1>
+<div class="container"> 
+    <div class="row no-gutter">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <h3 style="text-align: center; padding-top:20px;">Welcome back!</h3>
+                            <h1 style="text-align: center; padding-top:20px;">Log In</h1>   
+                            {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
+                            <div class="form-group">
+                                <form id="bg" method="post" action="{% url 'login' %}">
+                                    {% csrf_token %}
+                                    {{ form.username|as_crispy_field}}
+                                    {{ form.password|as_crispy_field }}
+                                    <button class="btn btn-outline-info" type="submit">
+                                        Log In
+                                    </button>
+                                    <input type="hidden" name="next" value="{{ next }}">
+                                </form>
+                                <div vlass="border-top pt-3">
+                                    <small class="text-muted">
+                                        Need And Account? <a class="ml-2" href="{% url 'signup' %}">Sign Up Now</a>
+                                    </small>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="btn" value="Log In">
-    <input type="hidden" name="next" value="{{ next }}">
-</form>
+
+
 
 {% endblock %}

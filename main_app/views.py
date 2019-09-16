@@ -1,6 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth import login
-from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -16,15 +18,15 @@ def signup(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            error_message = 'Invalid sign up - try again'
-    form = UserRegisterForm()
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect('experiences-list')
+    else:
+        error_message = 'Invalid sign up - try again'
+        form = UserRegisterForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
-
 
 #------ PROFILE ------
 @login_required
@@ -36,6 +38,7 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
+            messages.success(request, f'Your account has been created')
             return redirect('profile')
 
     else:
