@@ -1,17 +1,68 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>Experiences</h1>
-<ul>
-{% for experience in object_list %}
-    <li>
-        <a href="{% url 'exp_detail' experience.id %}">{{ experience.title }}</a>
-    </li>
-{% empty %}
-    <li>No Experiences Yet. :(</li>
-{% endfor %}
-</ul>
+
+<header>
+  <div class="overlay"></div>
+  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="https://storage.coverr.co/videos/To-The-Left?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjExNDMyN0NEOTRCMUFCMTFERTE3IiwiaWF0IjoxNTY4NDk1NTgwfQ.Dnb-yOcxym7zR2ISA9oG6aEW7bF1QAQKXQFv6By2CGU" type="video/mp4">
+  </video>
+  <div class="container h-100">
+    <div class="d-flex h-100 text-center align-items-center">
+      <div class="w-100 text-white">
+        <h1 class="display-3">What's out there ?</h1>
+        <p class="lead mb-0">One-of-a-kind activities hosted by locals</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div style="height: 100px" class="container">
+    <h1 style="text-align: center; margin-top: 30px; color:#00134d ">All Experiences</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    {% for experience in object_list %}
+      <div class="col">
+        <div style="padding-bottom: 150px;" class="col">
+          
+          <a href="{% url 'exp_detail' experience.id %}">
+            <div class="card promoting-card" style="width: 18rem;">
+              <!-- Card content -->
+              <div class="card-body d-flex flex-row">
+              <!-- Avatar -->
+              <img src="{{ user.profile.image.url }}" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
+              <div>
+                <h4 class="card-title font-weight-bold mb-2">{{ experience.title }}</h4>
+                <p class="card-text" style="font-size:15px; color: #73798c; font-family: 'Tangerine', cursive"class="card-text"><i class="fas fa-map-marker-alt"></i> {{ experience.location }}</p>
+              </div>
+            </div>
+                
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top rounded-0" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/full page/2.jpg" alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+                
+            <!-- Card content -->
+            <div class="card-body">
+              <div class="collapse-content">
+                  <p style="font-size:15px; color: #73798c; font-family: 'Tangerine', cursive"class="card-text">{{ experience.description }}</p>
+                <!-- Button -->
+                <a style="color:red" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_detail' experience.id %}">Read more</a>
+                <i class="fas fa-share-alt text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="Share this post"></i>
+                <i class="fas fa-heart text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="I like it"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %} 
+  </div>
+</div>
+
 {% endblock %}
-
-
-
