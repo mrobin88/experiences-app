@@ -19,11 +19,12 @@
                     <div class="collapse-content">
                         <p><span style="font-weight: bold"> Description: </span> {{ experience.description.capitalize }}</p>
                         <p><span style="font-weight: bold">Price:</span> ${{ experience.price }}</p>
-                        <p><span style="font-weight: bold">Location:</span> {{ experience.location.capitalize }}</p>
                         <p><span style="font-weight: bold">Time:</span> {{ experience.hours|stringformat:"02d" }}:{{ experience.minutes|stringformat:"02d" }}</p>
                         <p><span style="font-weight: bold">Language Spoken:</span> {{ experience.language }}</p>
                         <p><span style="font-weight: bold">Host:</span> {{ experience.user.username.capitalize }}</p>
                         <p><span style="font-weight: bold">City:</span> {{ experience.city }}</p>
+                        <p><span style="font-weight: bold">Address:</span> {{ experience.address.capitalize }}</p>
+                        <p><span style="font-weight: bold">Zip Code:</span> {{ experience.zipcode | stringformat:"05d" }}</p>
                         <hr>
                         <!-- Button -->
                         <a style="color:#113ab6" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_update' experience.id %}">Edit</a>

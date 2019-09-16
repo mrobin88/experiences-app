@@ -19,9 +19,6 @@
             <div style="color:white">
                 {{ form.price|as_crispy_field }}
             </div>
-            <div style="color:white">
-                {{ form.location|as_crispy_field }}
-            </div>
             <div style="color: white" class="form-row">
                 <div class="form-group col-md-6 mb-0">
                     {{ form.hours|as_crispy_field }}
@@ -33,9 +30,21 @@
             <div style="color:white">
                 {{ form.language|as_crispy_field }}
             </div>
-            <div style="color:white">
-                {{ form.city|as_crispy_field }}
+
+
+            <div style="color: white" class="form-row">
+                <div class="form-group col-md-3 mb-0">
+                    {{ form.address|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-3 mb-0">
+                    {{ form.city|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-3 mb-0">
+                    {{ form.zipcode|as_crispy_field }}
+                </div>
             </div>
+          
+
             <button class="btn btn-outline-info btn-light" type="submit">
                 Create
             </button> 

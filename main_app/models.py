@@ -386,11 +386,12 @@ class Experience(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    location = models.CharField(max_length=100)
     hours = models.IntegerField(choices=HOURS, default=12)
     minutes = models.IntegerField(choices=MINUTES, default=0)
     language = models.CharField(max_length=100, choices=LANGUAGES, default='English')
     city = models.CharField(max_length=100, choices=CITIES, default='San Francisco')
+    address = models.CharField(max_length=100)
+    zipcode = models.IntegerField()
     # user in this case is equal to the experience host
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     

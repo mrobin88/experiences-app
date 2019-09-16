@@ -54,7 +54,7 @@ def profile(request):
 #----- EXPERIENCE ---------
 class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
-    fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language', 'city']
+    fields = ['title', 'description', 'price', 'hours', 'minutes', 'language', 'city', 'address', 'zipcode',]
     template_name = 'experiences/form.html'
 
     def form_valid(self, form):
