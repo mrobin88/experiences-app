@@ -80,6 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'experiencesapp',
+        'USER': 'postgres',
+        'PASSWORD': 'razanakotoM2@',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -129,7 +133,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Access the image in the browser
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = '/'
+
+LOGIN_REDIRECT_URL = '/experiences'
 LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/experiences'
 

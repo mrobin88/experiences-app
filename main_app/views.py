@@ -14,7 +14,7 @@ def home(request):
     return render(request, 'home.html')
 
 def signup(request):
-    error_message = ''
+    error_message=''
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -43,7 +43,7 @@ def profile(request):
 
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
+        p_form = ProfileUpdateForm(instance=Profile())
 
     context = {
         'u_form': u_form,
