@@ -39,6 +39,7 @@
         <div>
             <nav class="navbar navbar-dark navbar-expand-md bg-dark">
                 <div class="container">
+                 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         {% if user.is_authenticated %}
                         <a style="font-family: 'Satisfy'" class="navbar-brand" href="{% url 'home' %}">Experiences</a> 
@@ -59,6 +60,14 @@
                 </div>
             </nav>
         </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
   
     {% block content %}
     {% endblock %}

@@ -1,9 +1,9 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
+from django.contrib import messages
 from django.views.generic import DetailView
 from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.views.generic.list import ListView
 
 from django.contrib.auth.decorators import login_required
@@ -22,13 +22,13 @@ def signup(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            form.save()
+            username = form.cleaned_data.get('username')
             messages.success(request, f'Your account has been created! You are now able to log in')
             return redirect('experiences-list')
-        else:
-            error_message = 'Invalid sign up - try again'
-    form = UserRegisterForm()
+    else:
+        error_message = 'Invalid sign up - try again'
+        form = UserRegisterForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
@@ -47,7 +47,7 @@ def profile(request):
 
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
+        p_form = ProfileUpdateForm(instance=Profile())
 
     context = {
         'u_form': u_form,
