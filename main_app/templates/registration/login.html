@@ -18,10 +18,10 @@
                                     {% csrf_token %}
                                     {{ form.username|as_crispy_field}}
                                     {{ form.password|as_crispy_field }}
-                        
                                     <button class="btn btn-outline-info" type="submit">
                                         Log In
                                     </button>
+                                    <input type="hidden" name="next" value="{{ next }}">
                                 </form>
                                 <div vlass="border-top pt-3">
                                     <small class="text-muted">
@@ -36,6 +36,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

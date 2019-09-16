@@ -17,7 +17,7 @@ class UserRegisterForm(UserCreationForm):
             'password1', 
             'password2'
         ]
-    
+
     def save(self, commit=True):
         user = super(UserRegisterForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']

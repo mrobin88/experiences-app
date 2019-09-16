@@ -133,6 +133,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Access the image in the browser
 MEDIA_URL = '/media/'
 
+
 LOGIN_REDIRECT_URL = '/experiences'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = '/experiences'
