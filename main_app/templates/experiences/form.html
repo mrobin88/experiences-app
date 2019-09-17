@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-   
 <div style="background-image:url('https://images.pexels.com/photos/2064058/pexels-photo-2064058.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'); background-size: cover; background-repeat: no-repeat;">
     {% if object %}
     <h1>{{object.title}}</h1>
-        {% else %}
+    {% else %}
     <h1>Add Experience</h1>
-        {% endif %}
+    {% endif %}
     <div style="background-color: rgba(255, 255, 255, 0.3);" class="container bg" style="width:500px;">
         <form  action="" method="post">
             {% csrf_token %}
@@ -23,7 +22,6 @@
             <div style="color:white">
                 {{ form.location|as_crispy_field }}
             </div>
-
             <div style="color: white" class="form-row">
                 <div class="form-group col-md-6 mb-0">
                     {{ form.hours|as_crispy_field }}
@@ -35,6 +33,9 @@
             <div style="color:white">
                 {{ form.language|as_crispy_field }}
             </div>
+            <div style="color:white">
+                {{ form.city|as_crispy_field }}
+            </div>
             <button class="btn btn-outline-info btn-light" type="submit">
                 Create
             </button> 
@@ -42,11 +43,5 @@
     </div>
     <br/>
 </div>
-<script>
-    M.FormSelect.init(document.getElementById('id_hours'));
-    M.FormSelect.init(document.getElementById('id_minutes'));
-    M.FormSelect.init(document.getElementById('id_language'));
-    M.FormSelect.init(document.getElementById('id_city'));
-</script>
 
 {% endblock %}

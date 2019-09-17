@@ -61,7 +61,7 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class ExperienceUpdate(UpdateView):
+class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
     fields = '__all__'
     template_name = 'experiences/form.html'
@@ -71,7 +71,7 @@ class ExperienceList(ListView):
     context_object_name = 'experiences'
     template_name = 'experiences/index.html'
 
-class ExperienceDetail(LoginRequiredMixin, DetailView):
+class ExperienceDetail(DetailView):
     model = Experience
     template_name = 'experiences/show.html'
 
@@ -118,8 +118,8 @@ class BookingDelete(LoginRequiredMixin, DeleteView):
     template_name = 'bookings/confirm_delete.html'
     success_url = '/bookings/'
 
-class BookingList(LoginRequiredMixin, ListView):
-    context_object_name = 'bookings'
-    template_name = 'bookings/index.html'
-    def get_queryset(self):
-        return Booking.objects.filter(user=self.request.user)
+
+@login_required
+def bookingList(request):
+    bookings = Booking.objects.filter(user=request.user)
+    return render(request, 'bookings/index.html', { 'bookings': bookings })
