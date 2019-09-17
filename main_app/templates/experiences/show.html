@@ -36,5 +36,25 @@
         </div>
     </div>
 </div>
-<a href="{%url 'exp_review' experience.id %}">Review this Event</a>
+
+<!-- this is where reviews are added -->
+<a href="{%url 'exp_review' experience.id %}">REVIEW This Event</a>
+
+
+</form>
+<table class="striped">
+        <thead>
+          <tr><th>Review</th><th>Rating</th></tr>
+        </thead>
+        <tbody>
+          {% for comment in review.all %}
+            <tr>
+              <td>{{review.comment}}</td>
+              <td>{{review.rating}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
 {% endblock %}

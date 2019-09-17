@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
@@ -9,6 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Experience, Profile, Booking, Review
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
+
 
 def home(request):
     return render(request, 'home.html')
@@ -23,7 +25,7 @@ def signup(request):
             messages.success(request, f'Your account has been created! You are now able to log in')
             return redirect('experiences-list')
     else:
-        error_message = 'Invalid sign up - try again'
+        error_messageExperienceDetail = 'Invalid sign up - try again'
         form = UserRegisterForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
@@ -71,10 +73,10 @@ class ExperienceList(ListView):
     context_object_name = 'experiences'
     template_name = 'experiences/index.html'
 
-class ExperienceDetail(LoginRequiredMixin, DetailView):
+class ExperienceDetail(LoginRequiredMixin, DetailView, ListView):
     model = Experience
     template_name = 'experiences/show.html'
-
+   
 class ExperienceDelete(LoginRequiredMixin, DeleteView):
     model = Experience
     template_name = 'experiences/confirm_delete.html'
@@ -82,8 +84,15 @@ class ExperienceDelete(LoginRequiredMixin, DeleteView):
 
 class ExperienceReview(LoginRequiredMixin, CreateView):
     model = Review
-    fields = ['rating', 'comment']
+    fields = ['comment', 'rating']
     template_name = 'experiences/review.html'
+    reverse_lazy(ExperienceDetail)
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.experience = Experience.objects.get(id=self.kwargs['pk'])
+        return super().form_valid(form)
+
 
 @login_required
 def bookingNew(request, exp_id):

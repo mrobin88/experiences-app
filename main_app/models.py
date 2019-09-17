@@ -419,10 +419,13 @@ class Booking(models.Model):
 
 # ---- REVIEW ------
 class Review(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
     rating = models.IntegerField(validators=[MinValueValidator(1) , MaxValueValidator(5)])
     comment = models.TextField(max_length=250)
+    
+    def get_absolute_url(self):
+        return reverse('exp_detail', kwargs = { 'pk': self.experience.id })
 
     def __str__(self):
         return f'Review by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
