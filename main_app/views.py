@@ -12,7 +12,7 @@ from .models import Experience, Profile, Booking, Review
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
 
 def home(request):
-    return render(request, 'home.html')
+    return redirect('experiences-list')
 
 def signup(request):
     error_message=''
