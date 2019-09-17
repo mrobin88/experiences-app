@@ -18,6 +18,7 @@ urlpatterns = [
     path('experiences/<int:pk>/update/', views.ExperienceUpdate.as_view(), name='exp_update'),
     path('experiences/<int:pk>/delete/', views.ExperienceDelete.as_view(), name='exp_delete'),
     path('experiences/<int:pk>/review/', views.ExperienceReview.as_view(), name='exp_review'),
+    path('experiences/<int:pk>/reviews/', views.ExperienceReviewList.as_view(), name='exp_review_list'),
     path('experiences/<int:exp_id>/bookings/new/', views.bookingNew, name='bkng_new'),
     path('experiences/<int:exp_id>/bookings/create/', views.bookingCreate, name='bkng_create'),
     path('bookings/', views.bookingList, name='bkng_list'),

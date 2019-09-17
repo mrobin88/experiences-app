@@ -92,6 +92,12 @@ class ExperienceReview(LoginRequiredMixin, CreateView):
         form.instance.experience = Experience.objects.get(id=self.kwargs['pk'])
         return super().form_valid(form)
 
+class ExperienceReviewList(ListView):
+    context_object_name = 'reviews'
+    template_name = 'experiences/reviews.html'
+    def get_queryset(self, *args, **kwargs):
+        return Review.objects.filter(experience_id=self.kwargs['pk'])
+    
 @login_required
 def bookingNew(request, exp_id):
     experience = Experience.objects.get(id=exp_id)
