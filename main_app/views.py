@@ -46,12 +46,14 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=Profile())
 
+    experiences = Experience.objects.filter(user_id=request.user.id)
     bookings = Booking.objects.filter(user_id=request.user.id)
     
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'bookings': bookings
+        'bookings': bookings,
+        'experiences': experiences,
     }
     return render(request, 'registration/profile.html', context)
 
