@@ -424,6 +424,9 @@ class Review(models.Model):
     rating = models.IntegerField(validators=[MinValueValidator(1) , MaxValueValidator(5)])
     comment = models.TextField(max_length=250)
 
+    def get_absolute_url(self):
+        return reverse('exp_detail', kwargs = { 'pk': self.experience.id })
+
     def __str__(self):
         return f'Review by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
 

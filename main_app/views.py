@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
@@ -84,6 +85,12 @@ class ExperienceReview(LoginRequiredMixin, CreateView):
     model = Review
     fields = ['rating', 'comment']
     template_name = 'experiences/review.html'
+    reverse_lazy(ExperienceDetail)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.experience = Experience.objects.get(id=self.kwargs['pk'])
+        return super().form_valid(form)
 
 @login_required
 def bookingNew(request, exp_id):
