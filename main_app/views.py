@@ -61,7 +61,7 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class ExperienceUpdate(UpdateView):
+class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
     fields = '__all__'
     template_name = 'experiences/form.html'
@@ -71,7 +71,7 @@ class ExperienceList(ListView):
     context_object_name = 'experiences'
     template_name = 'experiences/index.html'
 
-class ExperienceDetail(LoginRequiredMixin, DetailView):
+class ExperienceDetail(DetailView):
     model = Experience
     template_name = 'experiences/show.html'
 
