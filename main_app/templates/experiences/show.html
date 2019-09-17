@@ -25,17 +25,27 @@
                         <p><span style="font-weight: bold">Host:</span> {{ experience.user.username.capitalize }}</p>
                         <p><span style="font-weight: bold">City:</span> {{ experience.city }}</p>
                         <hr>
+                        {%if request.user.id == experience.user.id %}
                         <!-- Button -->
                         <a style="color:#113ab6" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_update' experience.id %}">Edit</a>
                         <a style="color:red;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_delete' experience.id %}">Delete</a>
+                        {%endif%}
                     </div>
                 </div>
-            <div class="card-action">
-                <a href="{% url 'bkng_new' experience.id %}">Book this Experience!</a>
+                {% if request.user.id != experience.user.id %}
+                <div class="card-action">
+                    <a href="{% url 'bkng_new' experience.id %}">Book this Experience!</a>
+                </div>
+                {% endif %}
             </div>
+            <div id="reviewOpts">
+            {%if request.user.id == experience.user.id %}
+             <a id="reviewLinkList " href="{% url 'exp_review_list' experience.id %}">All Reviews</a>
+            {% else %}
+            <a class="valign-wrapper" id="reviewLink" href="{% url 'exp_review' experience.id %}">Write a Review</a>
+            {%endif%}
         </div>
     </div>
 </div>
-<a href="{% url 'exp_review' experience.id %}">Review this Event</a>
-<a href="{% url 'exp_review_list' experience.id %}">SHOW ALL REVIEWS</a>
+
 {% endblock %}
