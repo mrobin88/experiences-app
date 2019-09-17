@@ -36,5 +36,6 @@
         </div>
     </div>
 </div>
-<a href="{%url 'exp_review' experience.id %}">Review this Event</a>
+<a href="{% url 'exp_review' experience.id %}">Review this Event</a>
+<a href="{% url 'exp_review_list' experience.id %}">SHOW ALL REVIEWS</a>
 {% endblock %}
