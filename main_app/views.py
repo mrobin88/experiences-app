@@ -7,12 +7,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Experience, Profile, Booking, Review
+import uuid
+import boto3
+from .models import Experience, Profile, Booking, Review, Photo
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
 
 def home(request):
     return render(request, 'home.html')
 
+#------ SIGNUP ------
 def signup(request):
     error_message=''
     if request.method == 'POST':
@@ -43,7 +46,7 @@ def profile(request):
 
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=Profile())
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,
@@ -85,6 +88,7 @@ class ExperienceReview(LoginRequiredMixin, CreateView):
     fields = ['rating', 'comment']
     template_name = 'experiences/review.html'
 
+#----- BOOKING ---------
 @login_required
 def bookingNew(request, exp_id):
     experience = Experience.objects.get(id=exp_id)
@@ -123,3 +127,22 @@ class BookingList(LoginRequiredMixin, ListView):
     template_name = 'bookings/index.html'
     def get_queryset(self):
         return Booking.objects.filter(user=self.request.user)
+
+#----- PHOTO ---------
+def add_photo(request, experience_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            # we can assign to cat_id or cat (if you have a cat object)
+            photo = Photo(url=url, experience_id=experience_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('exp_detail', experience_id=experience_id)
