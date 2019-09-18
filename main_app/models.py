@@ -382,7 +382,7 @@ class Experience(models.Model):
     language = models.CharField(max_length=100, choices=LANGUAGES, default='English')
     city = models.CharField(max_length=100, choices=CITIES, default='San Francisco')
     address = models.CharField(max_length=100)
-    zipcode = models.IntegerField()
+    zipcode = models.IntegerField(default=99999)
     # user in this case is equal to the experience host
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
