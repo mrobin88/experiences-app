@@ -134,3 +134,5 @@ LOGIN_REDIRECT_URL = '/experiences'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = '/experiences'
 
+import django_heroku
+django_heroku.settings(locals())
