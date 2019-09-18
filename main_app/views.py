@@ -15,7 +15,7 @@ from .models import Experience, Profile, Booking, Review, Photo
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
-BUCKET = 'catcollector'
+BUCKET = 'catcollector-gam'
 
 def home(request):
     return redirect('experiences-list')
