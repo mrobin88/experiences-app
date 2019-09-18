@@ -76,7 +76,7 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
 
 class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
-    fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language', 'city']
+    fields = ['title', 'description', 'price', 'hours', 'minutes', 'language', 'city', 'address', 'zipcode',]
     template_name = 'experiences/form.html'
 
 class ExperienceList(ListView):
