@@ -12,6 +12,6 @@
     <a href="{% url 'exp_detail' experience.id %}">Cancel</a>
 </form>
 {% else %}
-<p style="color:red; padding-top: 15px; text-align: center">You cannot delete {{ experience.user.username.capitalize }}'s experience!</p>
+<a href="{% url 'exp_detail' experience.id %}"><p style="color:red; padding-top: 15px; text-align: center">You cannot delete {{ experience.user.username.capitalize }}'s experience!</p></a>
 {% endif %}
 {% endblock %}

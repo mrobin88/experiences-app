@@ -45,7 +45,7 @@
             </form>
         </div>
         {% else %}
-    <p style="color:white; text-align: center">You cannot edit {{ object.user.username.capitalize }}'s experience!</p>
+    <a href="{% url 'exp_detail' experience.id %}"><p style="color:white; text-align: center">You cannot edit {{ object.user.username.capitalize }}'s experience!</p></a>
         {% endif %}
     {% else %}
     <h1>Add Experience</h1>
