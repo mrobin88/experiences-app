@@ -77,9 +77,8 @@
             </form>
 
             <div id="reviewOpts">
-                {%if request.user.id == experience.user.id %}
-                    <a id="reviewLinkList " class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_review_list' experience.id %}">All Reviews</a>
-                {% else %}
+                <a id="reviewLinkList " class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_review_list' experience.id %}">All Reviews</a>
+                {%if request.user.id != experience.user.id %}
                     <a style="color:green; margin: 10px;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed"  href="{% url 'exp_review' experience.id %}">Write a Review</a>
                 {%endif%}
             </div>
