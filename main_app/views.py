@@ -137,12 +137,6 @@ class BookingDelete(LoginRequiredMixin, DeleteView):
     model = Booking
     template_name = 'bookings/confirm_delete.html'
     success_url = '/bookings/'
-
-class BookingList(LoginRequiredMixin, ListView):
-    context_object_name = 'bookings'
-    template_name = 'bookings/index.html'
-    def get_queryset(self):
-        return Booking.objects.filter(user=self.request.user)
     
 
 #----- REVIEW ---------
