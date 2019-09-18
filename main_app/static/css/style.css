@@ -254,3 +254,24 @@ header .overlay {
     line-height: 1.428571429;
     color: #999;
 }
+
+/*------ CAROUSEL ---------*/
+.blog .carousel-indicators {
+	left: 0;
+	top: auto;
+    bottom: -40px;
+
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+    background: #a3a3a3;
+    border-radius: 50%;
+    width: 30px;
+    height: 8px;
+    padding:40px;
+}
+
+.blog .carousel-indicators .active {
+background: #707070;
+}

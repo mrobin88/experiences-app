@@ -7,8 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Experiences</title>
+
     <!-- Bootstrap CSS -->
     <link href="bootstrap.css" rel="stylesheet" media="screen">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
@@ -27,10 +29,14 @@
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
 
     <!-- JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
 </head>
 
@@ -43,7 +49,7 @@
                     {% if user.is_authenticated %}
                     <ul class="navbar-nav ml-auto"> 
                         <li class="nav-item"><a class="nav-link" href="{% url 'exp_create' %}"><i class="fa fa-home"></i>   Host Experiences</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'bkng_list' %}">Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'bkng_list' %}"><i class="fas fa-calendar-week"></i>  Bookings</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}"><i class="fa fa-user"></i>   Account</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>  Log Out </a></li>
                     </ul>

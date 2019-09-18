@@ -2,9 +2,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="view" style="background-image: url('https://images.pexels.com/photos/1842623/pexels-photo-1842623.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+    
     <div class="container"> 
-        <h1 style="padding: 20px; text-align:center; color:white;">Sign Up</h1>
-        <div class="row" style="margin: 80px; padding-bottom: 50px;">
+        <h1 style ="text-align:center; color:white;">Sign Up</h1>
+        <div class="row" style="padding-bottom: 30px;">
             {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
             <form style="background-color: rgba(7, 7, 7, 0.3);" class="bg" method="post" action="{% url 'signup' %}">
                 {% csrf_token %}

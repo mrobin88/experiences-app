@@ -9,13 +9,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-
-from .models import Experience, Profile, Booking, Review
+import uuid
+import boto3
+from .models import Experience, Profile, Booking, Review, Photo
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
+
+S3_BASE_URL = 'https://s3-us-west-2.amazonaws.com/'
+BUCKET = 'django-project-experiences'
 
 def home(request):
     return redirect('experiences-list')
 
+#------ SIGNUP ------
 def signup(request):
     error_message=''
     if request.method == 'POST':
@@ -46,7 +51,7 @@ def profile(request):
 
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=Profile())
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     experiences = Experience.objects.filter(user_id=request.user.id)
     bookings = Booking.objects.filter(user_id=request.user.id)
@@ -62,7 +67,7 @@ def profile(request):
 #----- EXPERIENCE ---------
 class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
-    fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language', 'city']
+    fields = ['title', 'description', 'price', 'hours', 'minutes', 'language', 'city', 'address', 'zipcode',]
     template_name = 'experiences/form.html'
 
     def form_valid(self, form):
@@ -71,7 +76,7 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
 
 class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
-    fields = ['title', 'description', 'price', 'location', 'hours', 'minutes', 'language', 'city']
+    fields = ['title', 'description', 'price', 'hours', 'minutes', 'language', 'city', 'address', 'zipcode',]
     template_name = 'experiences/form.html'
 
 class ExperienceList(ListView):
@@ -88,23 +93,7 @@ class ExperienceDelete(LoginRequiredMixin, DeleteView):
     template_name = 'experiences/confirm_delete.html'
     success_url = '/experiences/'
 
-class ExperienceReview(LoginRequiredMixin, CreateView):
-    model = Review
-    fields = ['rating', 'comment']
-    template_name = 'experiences/review.html'
-    reverse_lazy(ExperienceDetail)
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.experience = Experience.objects.get(id=self.kwargs['pk'])
-        return super().form_valid(form)
-
-class ExperienceReviewList(ListView):
-    context_object_name = 'reviews'
-    template_name = 'experiences/reviews.html'
-    def get_queryset(self, *args, **kwargs):
-        return Review.objects.filter(experience_id=self.kwargs['pk'])
-    
+#----- BOOKING ---------
 @login_required
 def bookingNew(request, exp_id):
     experience = Experience.objects.get(id=exp_id)
@@ -133,12 +122,6 @@ def bookingCreate(request, exp_id):
         new_booking.save()
     return redirect('bkng_list')
 
-class BookingDelete(LoginRequiredMixin, DeleteView):
-    model = Booking
-    template_name = 'bookings/confirm_delete.html'
-    success_url = '/bookings/'
-
-
 @login_required
 def bookingList(request):
     bookings = Booking.objects.filter(user=request.user)
@@ -149,3 +132,48 @@ def search(request):
     results = Experience.objects.filter(city__icontains = query)
     context = RequestContext(request)
     return render_to_response('experiences/results.html', { "experiences": results })
+
+class BookingDelete(LoginRequiredMixin, DeleteView):
+    model = Booking
+    template_name = 'bookings/confirm_delete.html'
+    success_url = '/bookings/'
+    
+
+#----- REVIEW ---------
+class ExperienceReviewList(ListView):
+    context_object_name = 'reviews'
+    template_name = 'experiences/reviews.html'
+    def get_queryset(self, *args, **kwargs):
+        return Review.objects.filter(experience_id=self.kwargs['pk'])
+
+class ExperienceReview(LoginRequiredMixin, CreateView):
+    model = Review
+    fields = ['rating', 'comment']
+    template_name = 'experiences/review.html'
+    reverse_lazy(ExperienceDetail)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.experience = Experience.objects.get(id=self.kwargs['pk'])
+        return super().form_valid(form)
+
+#----- PHOTO ---------
+def add_photo(request, pk):
+    # photo-file will be the "name" attribute on the <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            # we can assign to cat_id or cat (if you have a cat object)
+            photo = Photo(url=url, experience_id=pk)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('exp_detail', pk=pk)
+    

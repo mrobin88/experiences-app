@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'main_app',
+    'main_app.apps.MainAppConfig',
     'crispy_forms',
     'languages',
     'django.contrib.admin',
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'experiencesapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'experiencesapp'
+        'NAME': 'experiencesapp',
     }
 }
 
@@ -129,8 +130,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Access the image in the browser
 MEDIA_URL = '/media/'
 
-
 LOGIN_REDIRECT_URL = '/experiences'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = '/experiences'
 
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+# Prevent from having same file name
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
