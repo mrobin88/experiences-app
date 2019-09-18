@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'experiencesapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'experiencesapp',
+        'NAME': 'experiencesapp'
     }
 }
 
@@ -129,7 +129,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Access the image in the browser
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/experiences'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = '/experiences'
 

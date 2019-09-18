@@ -1,29 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Experience Details</h1>
-<div class="row">
-    <div class="col s6">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">{{ experience.title }}</span>
-                <p>Description: {{ experience.description.capitalize }}</p>
-                <p>Price: ${{ experience.price }}</p>
-                <p>Location: {{ experience.location.capitalize }}</p>
-                <p>Time: {{ experience.hours|stringformat:"02d" }}:{{ experience.minutes|stringformat:"02d" }}</p>
-                <p>Language Spoken: {{ experience.language }}</p>
-                <p>Host: {{ experience.user.username.capitalize }}</p>
+<div style="padding-top:30px" class="container">
+        <div style="padding-bottom: 150px;" class="col">
+            <div class="card promoting-card" style="width: 18rem;">
+                <div class="card-body d-flex flex-row">
+                    <h4 style="color:#113ab6" class="card-title font-weight-bold mb-2">{{ experience.title }}</h4>
+                </div>
+                <!-- Card image -->
+                <div class="view overlay">
+                    <img class="card-img-top rounded-0" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/full page/2.jpg" alt="Card image cap">
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <!-- Card content -->
+                <div class="card-body">
+                    <div class="collapse-content">
+                        <p><span style="font-weight: bold"> Description: </span> {{ experience.description.capitalize }}</p>
+                        <p><span style="font-weight: bold">Price:</span> ${{ experience.price }}</p>
+                        <p><span style="font-weight: bold">Location:</span> {{ experience.location.capitalize }}</p>
+                        <p><span style="font-weight: bold">Time:</span> {{ experience.hours|stringformat:"02d" }}:{{ experience.minutes|stringformat:"02d" }}</p>
+                        <p><span style="font-weight: bold">Language Spoken:</span> {{ experience.language }}</p>
+                        <p><span style="font-weight: bold">Host:</span> {{ experience.user.username.capitalize }}</p>
+                        <p><span style="font-weight: bold">City:</span> {{ experience.city }}</p>
+                        <hr>
+                        {%if request.user.id == experience.user.id %}
+                        <!-- Button -->
+                        <a style="color:#113ab6" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_update' experience.id %}">Edit</a>
+                        <a style="color:red;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_delete' experience.id %}">Delete</a>
+                        {%endif%}
+                    </div>
+                </div>
+                {% if request.user.id != experience.user.id %}
+                <div class="card-action">
+                    <a href="{% url 'bkng_new' experience.id %}">Book this Experience!</a>
+                </div>
+                {% endif %}
             </div>
-
-            <div class="card-action">
-                <a href="{% url 'exp_update' experience.id %}">Edit</a>
-                <a href="{% url 'exp_delete' experience.id %}">Delete</a>
-            </div>
-            <div class="card-action">
-                <a href="{% url 'bkng_new' experience.id %}">Book this Experience!</a>
-            </div>
+            <div id="reviewOpts">
+            {%if request.user.id == experience.user.id %}
+             <a id="reviewLinkList " href="{% url 'exp_review_list' experience.id %}">All Reviews</a>
+            {% else %}
+            <a class="valign-wrapper" id="reviewLink" href="{% url 'exp_review' experience.id %}">Write a Review</a>
+            {%endif%}
         </div>
     </div>
 </div>
-<a href="{%url 'exp_review' experience.id %}">Review this Event</a>
+
 {% endblock %}

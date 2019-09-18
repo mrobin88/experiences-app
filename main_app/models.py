@@ -365,8 +365,8 @@ CITIES = (
 
 #----- PROFILE ------
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="profile",  verbose_name=_("user"), on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default='profile_pics/default.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return f"{self.user.username}'s Profile ({self.id})"
@@ -423,6 +423,9 @@ class Review(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
     rating = models.IntegerField(validators=[MinValueValidator(1) , MaxValueValidator(5)])
     comment = models.TextField(max_length=250)
+
+    def get_absolute_url(self):
+        return reverse('exp_detail', kwargs = { 'pk': self.experience.id })
 
     def __str__(self):
         return f'Review by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
