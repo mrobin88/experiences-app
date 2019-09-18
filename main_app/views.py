@@ -93,6 +93,24 @@ class ExperienceDelete(LoginRequiredMixin, DeleteView):
     template_name = 'experiences/confirm_delete.html'
     success_url = '/experiences/'
 
+class ExperienceReview(LoginRequiredMixin, CreateView):
+    model = Review
+    fields = ['rating', 'comment']
+    template_name = 'experiences/review.html'
+    reverse_lazy(ExperienceDetail)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.experience = Experience.objects.get(id=self.kwargs['pk'])
+        return super().form_valid(form)
+
+class ExperienceReviewList(ListView):
+    context_object_name = 'reviews'
+    template_name = 'experiences/reviews.html'
+    def get_queryset(self, *args, **kwargs):
+        return Review.objects.filter(experience_id=self.kwargs['pk'])
+    
+
 #----- BOOKING ---------
 @login_required
 def bookingNew(request, exp_id):
