@@ -101,7 +101,7 @@ def bookingNew(request, exp_id):
     return render(request, 'bookings/new.html', {
         'experience': experience,
         'booking_form': booking_form
-})
+    })
 
 @login_required
 def bookingShow(request, exp_id, bkng_id):
@@ -110,7 +110,7 @@ def bookingShow(request, exp_id, bkng_id):
     return render(request, 'bookings/show.html', {
         'experience': experience,
         'booking': booking
-})
+    })
 
 @login_required
 def bookingCreate(request, exp_id):
