@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-    {% if object %}
-<h1><span class="teal-text">{{object.title}}</span></h1>
+
+{% if object %}
+<h1>{{object.title}}</span></h1>
     {% else %}
 <h1>Add Review</h1>
     {% endif %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
-</form>
+<div class="container" style="border: 1px solid grey; border-radius: 3px; margin: auto; margin-bottom: 30px; padding: 30px; width: 500px;">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div style="color:#113ab6; font-weight: bold;" >
+            {{ form.rating|as_crispy_field }}
+        </div>
+        <div style="color:#113ab6; font-weight: bold;">
+        
+            {{ form.comment|as_crispy_field }}
+        </div>
+
+        <button class="btn btn-outline-info btn-light" type="submit">
+            Submit
+        </button> 
+    </form>
+</div>
 {% endblock %}

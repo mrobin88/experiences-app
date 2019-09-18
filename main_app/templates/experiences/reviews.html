@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Review List</h1>
+
+{% for review in object_list %}
+<div class="container" style="border: 1px solid gray; border-radius: 3px; margin-bottom: 7px; width:500px;">
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col">
+                <div class="user-profile-card">
+                    <div class="user-profile-header">
+                        <div class="user-profile-avatar text-center">
+                            {% if user.profile.image.url %}
+                                <img style="border-radius:50%;" alt="avatar" src="{{ review.user.profile.image.url }}">
+                            {% else %}
+                                <img alt="avatar" src="/media/profile_pics/default.jpg">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-center" style="padding-top: 50px;">
+                    <p><span style="color:rgb(7, 55, 145); font-family: 'Satisfy', cursive;" class="account-heading"> {{ review.user.username }} </span>  says, "{{ review.comment }}" </p>
+                    <p><span style="font-weight: bold">rating:</span>{{ review.rating }}</p>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div>
+    <p>No Reviews yet</p>
+</div> 
+{% endfor %}
+
+
+
+{% endblock %}

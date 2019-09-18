@@ -417,6 +417,9 @@ class Review(models.Model):
     rating = models.IntegerField(validators=[MinValueValidator(1) , MaxValueValidator(5)])
     comment = models.TextField(max_length=250)
 
+    def get_absolute_url(self):
+        return reverse('exp_detail', kwargs = { 'pk': self.experience.id })
+
     def __str__(self):
         return f'Review by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
 
@@ -425,5 +428,10 @@ class Photo(models.Model):
     url = models.CharField(max_length=200)
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
 
+    def get_absolute_url(self):
+        return reverse('exp_detail', kwargs = { 'pk': self.experience.id })
+
     def __str__(self):
-        return f"Photo for experience_id: {self.experience_id} @{self.url}"
+        return f"Photo for exp_id: {self.experience_id} @{self.url}"
+
+        

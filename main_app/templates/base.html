@@ -39,12 +39,11 @@
         <nav class="navbar navbar-dark navbar-expand-md bg-dark">
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <a style="font-family: 'Satisfy'" class="navbar-brand" href="{% url 'home' %}">Home</a> 
                     <a style="font-family: 'Satisfy'" class="navbar-brand" href="{% url 'experiences-list' %}">Experiences</a> 
                     {% if user.is_authenticated %}
                     <ul class="navbar-nav ml-auto"> 
                         <li class="nav-item"><a class="nav-link" href="{% url 'exp_create' %}"><i class="fa fa-home"></i>   Host Experiences</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'bkng_list' %}">Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'bkng_list' %}"><i class="fas fa-calendar-week"></i>  Bookings</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}"><i class="fa fa-user"></i>   Account</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>  Log Out </a></li>
                     </ul>

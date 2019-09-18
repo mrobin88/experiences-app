@@ -8,7 +8,11 @@
         <div class="user-profile-card">
           <div class="user-profile-header">
             <div class="user-profile-avatar text-center">
+              {% if user.profile.image.url %}
               <img alt="avatar" src="{{ user.profile.image.url }}">
+              {% else %}
+              <img alt="avatar" src="/media/profile_pics/default.jpg">
+              {% endif %}
               <div class="text-center">
                 <h2 style="color:rgb(7, 55, 145); font-family: 'Satisfy', cursive;" class="account-heading">{{ user.username }}</h2>
                 <small style="color:rgb(85, 93, 107)">{{ user.first_name }} {{ user.last_name }}</small>
@@ -23,6 +27,7 @@
     <div class="row">
       <div class="col">
         <h1 style="color:black"> My Experiences </h1>
+
       </div>
 
       <div class="col">
@@ -34,7 +39,6 @@
   <br>
   <legend  class="border-bottom mb-4">Profile Info</legend>
 </div>
-
 
 <div class="bg-dark">
   <div  class="container" style="padding: 30px; ">
