@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth import login
+from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 from .models import Experience, Profile, Booking, Review
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
@@ -141,3 +143,9 @@ class BookingDelete(LoginRequiredMixin, DeleteView):
 def bookingList(request):
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'bookings/index.html', { 'bookings': bookings })
+
+def search(request):
+    query = request.GET.get('searchquery')
+    results = Experience.objects.filter(city = query)
+    context = RequestContext(request)
+    return render_to_response('experiences/results.html', { "experiences": results })
