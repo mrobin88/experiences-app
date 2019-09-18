@@ -26,6 +26,7 @@
                     <div class="col s6">
                         <div class="card-body">
                             <div class="collapse-content">
+                                <p><span style="font-weight: bold"> Category: </span> {{ experience.category.capitalize }}</p>
                                 <p><span style="font-weight: bold"> Description: </span> {{ experience.description.capitalize }}</p>
                                 <p><span style="font-weight: bold">Price:</span> ${{ experience.price }}</p>
                                 <p><span style="font-weight: bold">Time:</span> {{ experience.hours|stringformat:"02d" }}:{{ experience.minutes|stringformat:"02d" }}</p>

@@ -67,7 +67,7 @@ def profile(request):
 #----- EXPERIENCE ---------
 class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
-    fields = ['title', 'description', 'price', 'hours', 'minutes', 'language', 'city', 'address', 'zipcode',]
+    fields = ['title', 'category', 'description', 'price', 'hours', 'minutes', 'language', 'city', 'address', 'zipcode',]
     template_name = 'experiences/form.html'
 
     def form_valid(self, form):
@@ -76,7 +76,7 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
 
 class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
-    fields = ['title', 'description', 'price', 'hours', 'minutes', 'language', 'city', 'address', 'zipcode',]
+    fields = ['title', 'category', 'description', 'price', 'hours', 'minutes', 'language', 'city', 'address', 'zipcode']
     template_name = 'experiences/form.html'
 
 class ExperienceList(ListView):
@@ -129,7 +129,8 @@ def bookingList(request):
 
 def search(request):
     query = request.GET.get('searchquery')
-    results = Experience.objects.filter(city__icontains = query)
+    results = list(Experience.objects.filter(city__icontains = query))
+    results.extend(list(Experience.objects.filter(category__icontains = query)))
     context = RequestContext(request)
     return render_to_response('experiences/results.html', { "experiences": results })
 

@@ -363,6 +363,15 @@ CITIES = (
     ('Zhengzhou', 'Zhengzhou'),
     ('Zibo', 'Zibo')
 )
+CATEGORIES = (
+    ('Art', 'Art'),
+    ('Food', 'Food'),
+    ('Sports', 'Sports'),
+    ('Adventure', 'Adventure'),
+    ('Workshop', 'Workshop'),
+    ('Other', 'Other')
+)
+
 
 #----- PROFILE ------
 class Profile(models.Model):
@@ -375,7 +384,8 @@ class Profile(models.Model):
 # ---- EXPERIENCE ------
 class Experience(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length=250)
+    category = models.CharField(max_length=100, choices=CATEGORIES, default='Food')
+    description = models.TextField(max_length=750)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     hours = models.IntegerField(choices=HOURS, default=12)
     minutes = models.IntegerField(choices=MINUTES, default=0)

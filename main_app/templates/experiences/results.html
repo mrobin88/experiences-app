@@ -20,7 +20,7 @@
 <div class="container">
     <form action="{% url 'exp_search' %}" method="GET" style="text-align: center; margin-top: 30px">
         <input style="text-align: center; color:#00134d" type="text" name="searchquery" value="{{ query }}">
-        <input style="background-color:#00134d; color: white" type="submit" value="Search Experiences by City">
+        <input style="background-color:#00134d; color: white" type="submit" value="Search Experiences by City or Category">
     </form>
 </div>
 
@@ -45,7 +45,7 @@
                             {% endif %}
                             <div>
                                 <h4 class="card-title font-weight-bold mb-2">{{ experience.title }}</h4>
-                                <p class="card-text" style="font-size:15px; color: #73798c; font-family: 'Tangerine', cursive"class="card-text"><i class="fas fa-map-marker-alt"></i> {{ experience.location }}</p>
+                                <p class="card-text" style="font-size:15px; color: #73798c; font-family: 'Tangerine', cursive"class="card-text"><i class="fas fa-map-marker-alt"></i> {{ experience.city }}</p>
                             </div>
                         </div>
                         <!-- Card image -->
