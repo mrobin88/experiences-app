@@ -14,8 +14,8 @@ import boto3
 from .models import Experience, Profile, Booking, Review, Photo
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
 
-S3_BASE_URL = 'https://s3-us-west-2.amazonaws.com/'
-BUCKET = 'django-project-experiences'
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'catcollector'
 
 def home(request):
     return redirect('experiences-list')
