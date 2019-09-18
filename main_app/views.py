@@ -146,6 +146,6 @@ def bookingList(request):
 
 def search(request):
     query = request.GET.get('searchquery')
-    results = Experience.objects.filter(city = query)
+    results = Experience.objects.filter(city__icontains = query)
     context = RequestContext(request)
     return render_to_response('experiences/results.html', { "experiences": results })
