@@ -428,10 +428,7 @@ class Photo(models.Model):
     url = models.CharField(max_length=200)
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
 
-    def get_absolute_url(self):
-        return reverse('exp_detail', kwargs = { 'pk': self.experience.id })
-
     def __str__(self):
-        return f"Photo for exp_id: {self.experience_id} @{self.url}"
+        return f"Photo for exp_id: {self.experience_id} @{self.url} ({self.id})"
 
         
