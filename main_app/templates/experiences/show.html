@@ -63,7 +63,9 @@
                                 <a href="#">
                                     <img class="card" style="max-width:200px;" src="{{photo.url}}">
                                 </a>
+                            {% if request.user.id == experience.user.id %}
                                 <a style="color:red;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'delete_photo' experience.id photo.id%}">Delete</a>
+                            {% endif %}
                             </div>
                             {% empty %}
                                 <div style="margin: 20px">No Photos Uploaded</div>
