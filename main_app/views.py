@@ -81,11 +81,7 @@ class ExperienceDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context["bookings"] = Booking.objects.filter(experience_id=self.kwargs['pk']).filter(user_id=self.request.user)
         bookings = context["bookings"]
-        for booking in bookings:
-            print(f'~~~~~~~~~~~~~~~~~~{booking}~~~~~~~~~~~~~~~~~~~')
         return context 
-
-
 
 class ExperienceDelete(LoginRequiredMixin, DeleteView):
     model = Experience
