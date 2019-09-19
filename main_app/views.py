@@ -259,4 +259,11 @@ def add_photo(request, pk):
         except:
             print('An error occurred uploading file to S3')
     return redirect('exp_detail', pk=pk)
-    
+
+ 
+@login_required   
+def delete_photo(request, exp_id, photo_id):
+    Photo.objects.filter(id=photo_id).delete()
+
+    return redirect('exp_detail', pk=exp_id)
+
