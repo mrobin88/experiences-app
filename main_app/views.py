@@ -13,6 +13,12 @@ import uuid
 import boto3
 from .models import Experience, Profile, Booking, Review, Photo
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
+import os
+from unsplash_search import UnsplashSearch
+
+UNSPLASH_ACCESS_KEY = os.environ['UNSPLASH_ACCESS_KEY']
+unsplash = UnsplashSearch(UNSPLASH_ACCESS_KEY)
+
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'catcollector-gam'
@@ -54,8 +60,35 @@ def profile(request):
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     experiences = Experience.objects.filter(user_id=request.user.id)
+    for experience in experiences:
+        category = experience.category
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
+        if src_auth == None:
+            src_auth = '?'
+        experience.src_url = src_url
+        experience.src_auth = src_auth
+
     bookings = Booking.objects.filter(user_id=request.user.id)
-    
+    for booking in bookings:
+        category = booking.experience.category
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
+        if src_auth == None:
+            src_auth = '?'
+        booking.experience.src_url = src_url
+        booking.experience.src_auth = src_auth
+
     context = {
         'u_form': u_form,
         'p_form': p_form,
@@ -80,9 +113,26 @@ class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'experiences/form.html'
 
 class ExperienceList(ListView):
-    model = Experience
-    context_object_name = 'experiences'
     template_name = 'experiences/index.html'
+    
+    def get_queryset(self):
+        experiences = list(Experience.objects.all())
+        object_list = []
+        for experience in experiences:
+            category = experience.category
+            try:
+                src_data = unsplash.search_photo(category)
+                src_url = src_data['img']
+                src_auth = src_data['credits']
+            except:
+                src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+                src_auth = None
+            if src_auth == None:
+                src_auth = '?'
+            experience.src_url = src_url
+            experience.src_auth = src_auth
+            object_list.append(experience)
+        return object_list
 
 class ExperienceDetail(DetailView):
     model = Experience
@@ -131,13 +181,39 @@ def bookingCreate(request, exp_id):
 @login_required
 def bookingList(request):
     bookings = Booking.objects.filter(user=request.user)
+    for booking in bookings:
+        category = booking.experience.category
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
+        if src_auth == None:
+            src_auth = '?'
+        booking.experience.src_url = src_url
+        booking.experience.src_auth = src_auth
+
     return render(request, 'bookings/index.html', { 'bookings': bookings })
 
 def search(request):
     query = request.GET.get('searchquery')
     results = list(Experience.objects.filter(city__icontains = query))
     results.extend(list(Experience.objects.filter(category__icontains = query)))
-    context = RequestContext(request)
+    for experience in results:
+        category = experience.category
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
+        if src_auth == None:
+            src_auth = '?'
+        experience.src_url = src_url
+        experience.src_auth = src_auth
     return render_to_response('experiences/results.html', { "experiences": results })
 
 class BookingDelete(LoginRequiredMixin, DeleteView):
