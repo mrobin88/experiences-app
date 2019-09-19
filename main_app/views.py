@@ -176,6 +176,18 @@ def bookingNew(request, exp_id):
 def bookingShow(request, exp_id, bkng_id):
     experience = Experience.objects.get(id=exp_id)
     booking = Booking.objects.get(id=bkng_id)
+    category = booking.experience.category
+    try:
+        src_data = unsplash.search_photo(category)
+        src_url = src_data['img']
+        src_auth = src_data['credits']
+    except:
+        src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+        src_auth = None
+    if src_auth == None:
+        src_auth = '?'
+    booking.experience.src_url = src_url
+    booking.experience.src_auth = src_auth
     return render(request, 'bookings/show.html', {
         'experience': experience,
         'booking': booking
