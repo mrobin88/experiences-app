@@ -10,7 +10,7 @@
                 </div>
                 <!-- Card image -->
                 <div class="view overlay">
-                    <img class="card-img-top rounded-0" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/full page/2.jpg" alt="Card image cap">
+                    <img class="card-img-top rounded-0" src="{{ experience.src_url }}" alt="Card image cap">
                     <a href="#!">
                         <div class="mask rgba-white-slight"></div>
                     </a>
@@ -36,9 +36,13 @@
                     </div>
                 </div>
                 {% if request.user.id != experience.user.id %}
+                    {% if bookings %}
+                <p>You have booked this event</p>
+                    {% else %}
                 <div class="card-action">
                     <a style="color:green; margin: 10px;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'bkng_new' experience.id %}">Book this Experience!</a>
                 </div>
+                    {% endif %}
                 {% endif %}     
             </div>
         </div>
@@ -81,11 +85,12 @@
 
             {%endif%}
             <div id="reviewOpts">
+                <a id="reviewLinkList " class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_review_list' experience.id %}">All Reviews</a>
+                {% if request.user.id != experience.user.id %}
+                    {% if bookings %}
                 <a style="color:green; margin: 10px;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed"  href="{% url 'exp_review_list' experience.id %}">Write a Review</a>
-               
-                {%if request.user.id != experience.user.id %}
-                    <a style="color:green; margin: 10px;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed"  href="{% url 'exp_review' experience.id %}">Write a Review</a>
-                {%endif%}
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
