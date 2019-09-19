@@ -59,11 +59,9 @@
                         <div class="card-body">
                             <div class="collapse-content">
                                 <p style="margin-top: -18px; font-size:8px; color: #73798c; text-align: right">Photo by <a target="_blank" href="https://www.instagram.com/{{ experience.src_auth }}/"><span class="fa fa-instagram" aria-hidden="true"></span> {{ experience.src_auth }}</a> on <a target="_blank" href="https://unsplash.com">Unsplash</a></p>
-                                <p style="font-size:15px; color: #73798c; font-family: 'Tangerine', cursive"class="card-text">{{ experience.description }}</p>
+                                <p style="font-size:15px; color: #73798c; font-family: 'PT Sans Narrow', cursive"class="card-text">{{ experience.description }}</p>
                                 <!-- Button -->
                                 <a style="color:red" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_detail' experience.id %}">Read more</a>
-                                <i class="fas fa-share-alt text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="Share this post"></i>
-                                <i class="fas fa-heart text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="I like it"></i>
                             </div>
                         </div>
                     </div>
