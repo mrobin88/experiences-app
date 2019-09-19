@@ -62,15 +62,25 @@ def profile(request):
     experiences = Experience.objects.filter(user_id=request.user.id)
     for experience in experiences:
         category = experience.category
-        src_url = unsplash.search_photo(category)['img']
+        src_data = unsplash.search_photo(category)
+        src_url = src_data['img']
+        src_auth = src_data['credits']
+        if src_auth == None:
+            src_auth = '?'
         experience.src_url = src_url
-    
+        experience.src_auth = src_auth
+
     bookings = Booking.objects.filter(user_id=request.user.id)
     for booking in bookings:
         category = booking.experience.category
-        src_url = unsplash.search_photo(category)['img']
+        src_data = unsplash.search_photo(category)
+        src_url = src_data['img']
+        src_auth = src_data['credits']
+        if src_auth == None:
+            src_auth = '?'
         booking.experience.src_url = src_url
-    
+        booking.experience.src_auth = src_auth
+
     context = {
         'u_form': u_form,
         'p_form': p_form,
@@ -102,8 +112,13 @@ class ExperienceList(ListView):
         object_list = []
         for experience in experiences:
             category = experience.category
-            src_url = unsplash.search_photo(category)['img']
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+            if src_auth == None:
+                src_auth = '?'
             experience.src_url = src_url
+            experience.src_auth = src_auth
             object_list.append(experience)
         return object_list
 
@@ -150,8 +165,14 @@ def bookingList(request):
     bookings = Booking.objects.filter(user=request.user)
     for booking in bookings:
         category = booking.experience.category
-        src_url = unsplash.search_photo(category)['img']
+        src_data = unsplash.search_photo(category)
+        src_url = src_data['img']
+        src_auth = src_data['credits']
+        if src_auth == None:
+            src_auth = '?'
         booking.experience.src_url = src_url
+        booking.experience.src_auth = src_auth
+
     return render(request, 'bookings/index.html', { 'bookings': bookings })
 
 def search(request):
@@ -160,8 +181,13 @@ def search(request):
     results.extend(list(Experience.objects.filter(category__icontains = query)))
     for experience in results:
         category = experience.category
-        src_url = unsplash.search_photo(category)['img']
+        src_data = unsplash.search_photo(category)
+        src_url = src_data['img']
+        src_auth = src_data['credits']
+        if src_auth == None:
+            src_auth = '?'
         experience.src_url = src_url
+        experience.src_auth = src_auth
     return render_to_response('experiences/results.html', { "experiences": results })
 
 class BookingDelete(LoginRequiredMixin, DeleteView):

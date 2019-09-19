@@ -42,6 +42,7 @@
                         <!-- Card content -->
                         <div class="card-body">
                             <div class="collapse-content">
+                                <p style="margin-top: -18px; font-size:8px; color: #73798c; text-align: right">Photo by <a target="_blank" href="https://www.instagram.com/{{ booking.experience.src_auth }}/"><span class="fa fa-instagram" aria-hidden="true"></span> {{ booking.experience.src_auth }}</a> on <a target="_blank" href="https://unsplash.com">Unsplash</a></p>
                                 <p style="font-size:15px; color: #73798c; font-family: 'Tangerine', cursive"class="card-text">{{ booking.experience.description }}</p>
                                 <!-- Button -->
                                 <a style="color:red" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_detail' booking.experience.id %}">Read more</a>
