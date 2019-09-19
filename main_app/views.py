@@ -62,9 +62,13 @@ def profile(request):
     experiences = Experience.objects.filter(user_id=request.user.id)
     for experience in experiences:
         category = experience.category
-        src_data = unsplash.search_photo(category)
-        src_url = src_data['img']
-        src_auth = src_data['credits']
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
         if src_auth == None:
             src_auth = '?'
         experience.src_url = src_url
@@ -73,9 +77,13 @@ def profile(request):
     bookings = Booking.objects.filter(user_id=request.user.id)
     for booking in bookings:
         category = booking.experience.category
-        src_data = unsplash.search_photo(category)
-        src_url = src_data['img']
-        src_auth = src_data['credits']
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
         if src_auth == None:
             src_auth = '?'
         booking.experience.src_url = src_url
@@ -112,9 +120,13 @@ class ExperienceList(ListView):
         object_list = []
         for experience in experiences:
             category = experience.category
-            src_data = unsplash.search_photo(category)
-            src_url = src_data['img']
-            src_auth = src_data['credits']
+            try:
+                src_data = unsplash.search_photo(category)
+                src_url = src_data['img']
+                src_auth = src_data['credits']
+            except:
+                src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+                src_auth = None
             if src_auth == None:
                 src_auth = '?'
             experience.src_url = src_url
@@ -165,9 +177,13 @@ def bookingList(request):
     bookings = Booking.objects.filter(user=request.user)
     for booking in bookings:
         category = booking.experience.category
-        src_data = unsplash.search_photo(category)
-        src_url = src_data['img']
-        src_auth = src_data['credits']
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
         if src_auth == None:
             src_auth = '?'
         booking.experience.src_url = src_url
@@ -181,9 +197,13 @@ def search(request):
     results.extend(list(Experience.objects.filter(category__icontains = query)))
     for experience in results:
         category = experience.category
-        src_data = unsplash.search_photo(category)
-        src_url = src_data['img']
-        src_auth = src_data['credits']
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
         if src_auth == None:
             src_auth = '?'
         experience.src_url = src_url
