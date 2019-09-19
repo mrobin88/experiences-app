@@ -88,6 +88,12 @@ class ExperienceDetail(DetailView):
     model = Experience
     template_name = 'experiences/show.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["bookings"] = Booking.objects.filter(experience_id=self.kwargs['pk']).filter(user_id=self.request.user)
+        bookings = context["bookings"]
+        return context
+
 class ExperienceDelete(LoginRequiredMixin, DeleteView):
     model = Experience
     template_name = 'experiences/confirm_delete.html'
