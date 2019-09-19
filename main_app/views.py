@@ -141,7 +141,20 @@ class ExperienceDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["bookings"] = Booking.objects.filter(experience_id=self.kwargs['pk']).filter(user_id=self.request.user)
-        bookings = context["bookings"]
+        experience = Experience.objects.get(id=self.kwargs['pk'])
+        category = experience.category
+        try:
+            src_data = unsplash.search_photo(category)
+            src_url = src_data['img']
+            src_auth = src_data['credits']
+        except:
+            src_url = 'https://mdbootstrap.com/img/Photos/Horizontal/Food/full%20page/2.jpg'
+            src_auth = None
+        if src_auth == None:
+            src_auth = '?'
+        experience.src_url = src_url
+        experience.src_auth = src_auth
+        context["experience"] = experience
         return context
 
 class ExperienceDelete(LoginRequiredMixin, DeleteView):
