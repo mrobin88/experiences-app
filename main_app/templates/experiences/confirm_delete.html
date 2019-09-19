@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if experience.user.id == requst.user.id %}
+{% if experience.user.id == request.user.id %}
 <h1 style="color: #212529">Delete Experience</h1>
 
 <h4>Are you sure you want to delete <span class="teal-text">{{ object.title }}</span>?</h4>

@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Delete Booking</h1>
-
+{% if booking.user.id == request.user.id %}
 <h4>Are you sure you want to delete your booking for <span class="teal-text">{{ booking.experience.title }}</span> on <span class="teal-text">{{ booking.date }}</span> ?</h4>
 
 <form action="" method="POST">
@@ -10,4 +10,7 @@
     <input type="submit" value="Yes - Delete!" class="btn">
     <a href="{% url 'bkng_show' booking.experience_id booking.id %}">Cancel</a>
 </form>
+{% else %}
+<a href="{% url 'experiences-list' %}"><p style="color:red; padding-top: 15px; text-align: center">You cannot delete someone else's booking!</p></a>
+{% endif %}
 {% endblock %}
