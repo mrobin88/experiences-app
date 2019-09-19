@@ -15,7 +15,7 @@ urlpatterns = [
     path('experiences/', views.ExperienceList.as_view(), name='experiences-list'),
 
     path('experiences/<int:pk>/add_photo', views.add_photo, name='add_photo'),
-    path('experiences/<int:exp_id>/delete_photo/<int:photo_id>', views.delete_photo, name='delete_photo'),
+    path('experiences/<int:exp_id>/delete_photo/<int:photo_id>/', views.delete_photo, name='delete_photo'),
 
     path('experiences/search/', views.search, name='exp_search'),
     path('experiences/create/', views.ExperienceCreate.as_view(), name='exp_create'),
