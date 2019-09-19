@@ -140,7 +140,10 @@ class ExperienceDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["bookings"] = Booking.objects.filter(experience_id=self.kwargs['pk']).filter(user_id=self.request.user)
+        if self.request.user.is_authenticated:
+            context["bookings"] = Booking.objects.filter(experience_id=self.kwargs['pk']).filter(user_id=self.request.user)
+        else:
+            context["bookings"] = []
         experience = Experience.objects.get(id=self.kwargs['pk'])
         category = experience.category
         try:
