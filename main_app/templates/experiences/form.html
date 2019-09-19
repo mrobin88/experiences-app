@@ -4,7 +4,7 @@
 <div style="background-image:url('https://images.pexels.com/photos/2064058/pexels-photo-2064058.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'); background-size: cover; background-repeat: no-repeat;">
     {% if object %}
     <h1>{{object.title}}</h1>
-        {% if object.user.id == requst.user.id %}
+        {% if object.user.id == request.user.id %}
         <div style="background-color: rgba(255, 255, 255, 0.3);" class="container bg" style="width:500px;">
             <form  action="" method="post">
                 {% csrf_token %}
