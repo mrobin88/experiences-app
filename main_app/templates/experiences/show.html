@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container" style="margin-top: 30px;">
     <div class="row">
-        <div class="col" style="margin-left: 30px; margin-bottom: 30px;">
-            <div class="card promoting-card" style="width: 18rem;">
+        <div class="col" style="margin-left: 30px; margin-bottom: 30px; ">
+            <div class="card promoting-card" style="width: 400px;">
                 <div class="card-body d-flex flex-row">
                         <h4 style="color:#113ab6" class="card-title font-weight-bold mb-2">{{ experience.title }}</h4>
                 </div>
@@ -59,6 +59,7 @@
                                 <a href="#">
                                     <img class="card" style="max-width:200px;" src="{{photo.url}}">
                                 </a>
+                                <a style="color:red;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'delete_photo' experience.id photo.id%}">Delete</a>
                             </div>
                             {% empty %}
                                 <div class="card-panel teal-text center-align">No Photos Uploaded</div>
@@ -76,9 +77,12 @@
                     Upload Photo
                 </button> 
             </form>
+
+
             {%endif%}
             <div id="reviewOpts">
-                <a id="reviewLinkList " class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_review_list' experience.id %}">All Reviews</a>
+                <a style="color:green; margin: 10px;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed"  href="{% url 'exp_review_list' experience.id %}">Write a Review</a>
+               
                 {%if request.user.id != experience.user.id %}
                     <a style="color:green; margin: 10px;" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed"  href="{% url 'exp_review' experience.id %}">Write a Review</a>
                 {%endif%}
@@ -86,9 +90,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <script>
     $('#blogCarousel').carousel({

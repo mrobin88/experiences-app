@@ -15,11 +15,13 @@ urlpatterns = [
     path('experiences/', views.ExperienceList.as_view(), name='experiences-list'),
 
     path('experiences/<int:pk>/add_photo', views.add_photo, name='add_photo'),
+    path('experiences/<int:exp_id>/delete_photo/<int:photo_id>', views.delete_photo, name='delete_photo'),
 
     path('experiences/search/', views.search, name='exp_search'),
     path('experiences/create/', views.ExperienceCreate.as_view(), name='exp_create'),
     path('experiences/<int:pk>/update/', views.ExperienceUpdate.as_view(), name='exp_update'),
     path('experiences/<int:pk>/', views.ExperienceDetail.as_view(), name='exp_detail'),
+
     path('experiences/<int:pk>/delete/', views.ExperienceDelete.as_view(), name='exp_delete'),
     
     path('experiences/<int:pk>/review/', views.ExperienceReview.as_view(), name='exp_review'),

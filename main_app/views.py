@@ -14,8 +14,8 @@ import boto3
 from .models import Experience, Profile, Booking, Review, Photo
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
 
-S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
-BUCKET = 'catcollector-gam'
+S3_BASE_URL = 'https://s3-us-west-2.amazonaws.com/'
+BUCKET = 'django-project-experiences'
 
 def home(request):
     return redirect('experiences-list')
@@ -87,6 +87,7 @@ class ExperienceList(ListView):
 class ExperienceDetail(DetailView):
     model = Experience
     template_name = 'experiences/show.html'
+
 
 class ExperienceDelete(LoginRequiredMixin, DeleteView):
     model = Experience
@@ -177,4 +178,11 @@ def add_photo(request, pk):
         except:
             print('An error occurred uploading file to S3')
     return redirect('exp_detail', pk=pk)
-    
+
+ 
+@login_required   
+def delete_photo(request, exp_id, photo_id):
+    Photo.objects.filter(id=photo_id).delete()
+
+    return redirect('exp_detail', pk=exp_id)
+

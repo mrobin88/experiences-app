@@ -45,7 +45,7 @@
                             {% endif %}
                             <div>
                                 <h4 class="card-title font-weight-bold mb-2">{{ experience.title }}</h4>
-                                <p class="card-text" style="font-size:15px; color: #73798c; font-family: 'Tangerine', cursive"class="card-text"><i class="fas fa-map-marker-alt"></i> {{ experience.city }}</p>
+                                <p class="card-text" style="font-size:15px; color: #73798c; font-family: 'PT Sans Narrow', sans-serif;" class="card-text"><i class="fas fa-map-marker-alt"></i> {{ experience.city }}</p>
                             </div>
                         </div>
                         <!-- Card image -->
@@ -58,11 +58,9 @@
                         <!-- Card content -->
                         <div class="card-body">
                             <div class="collapse-content">
-                                <p style="font-size:15px; color: #73798c; font-family: 'Tangerine', cursive"class="card-text">{{ experience.description }}</p>
+                                <p style="font-size:15px; color: #73798c; font-family: 'PT Sans Narrow', sans-serif;" class="card-text">{{ experience.description }}</p>
                                 <!-- Button -->
                                 <a style="color:red" class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" href="{% url 'exp_detail' experience.id %}">Read more</a>
-                                <i class="fas fa-share-alt text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="Share this post"></i>
-                                <i class="fas fa-heart text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="I like it"></i>
                             </div>
                         </div>
                     </div>
