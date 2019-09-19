@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.core.files.storage import default_storage as storage
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 from PIL import Image
@@ -362,35 +363,36 @@ CITIES = (
     ('Zhengzhou', 'Zhengzhou'),
     ('Zibo', 'Zibo')
 )
+CATEGORIES = (
+    ('Art', 'Art'),
+    ('Food', 'Food'),
+    ('Sports', 'Sports'),
+    ('Adventure', 'Adventure'),
+    ('Workshop', 'Workshop'),
+    ('Other', 'Other')
+)
+
 
 #----- PROFILE ------
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='profile_pics/default.jpg', upload_to='profile_pics')
+    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
-        return f"{self.user.username}'s Profile ({self.id})"
-
-    def save(self):
-        super().save()
-
-        img = Image.open(self.image.path)
-        
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+        return f'{self.user.username} Profile'
 
 # ---- EXPERIENCE ------
 class Experience(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length=250)
+    category = models.CharField(max_length=100, choices=CATEGORIES, default='Food')
+    description = models.TextField(max_length=750)
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    location = models.CharField(max_length=100)
     hours = models.IntegerField(choices=HOURS, default=12)
     minutes = models.IntegerField(choices=MINUTES, default=0)
     language = models.CharField(max_length=100, choices=LANGUAGES, default='English')
     city = models.CharField(max_length=100, choices=CITIES, default='San Francisco')
+    address = models.CharField(max_length=100)
+    zipcode = models.IntegerField(default=99999)
     # user in this case is equal to the experience host
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
@@ -399,6 +401,7 @@ class Experience(models.Model):
     
     def get_absolute_url(self):
         return reverse('exp_detail', kwargs = { 'pk': self.id })
+
 
 # ---- BOOKING ------
 class Booking(models.Model):
@@ -430,3 +433,12 @@ class Review(models.Model):
     def __str__(self):
         return f'Review by {self.user} ({self.user_id}) for Experience ({self.experience_id})'
 
+# ---- PHOTO ------
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for exp_id: {self.experience_id} @{self.url} ({self.id})"
+
+        
