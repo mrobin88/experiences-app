@@ -5,7 +5,7 @@ for SEI-CC-4, project 3
 
 Experiences is a Python Django based application for finding activities around various locations. It also lets the user have the ability to host events or as we like to call them, Experiences.
 
-<img src="./media/mdImg/baner.png">
+<img src="https://raw.githubusercontent.com/g-merrill/experiences-app/6c025c4bda353cb1b03d93fa4ffaa734cf9e5767/media/mdImg/baner.png">
 
 
 ## Installation
