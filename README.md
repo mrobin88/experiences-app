@@ -26,7 +26,7 @@ No installation nesscary you can just go to this link.
 - (future ICEBOX) Google Places API
 - (future ICEBOX) Stripe payment processing API
 
-## The Pitch and our Planing 
+## The Pitch and our Planning 
 slide show to demo the application as a pitch(yes I know its beautiful.)
 [Pitch Presentation](https://docs.google.com/presentation/d/1DNAjXGBXbbPf6wL9p9H0ejlKsjO_Jow6QXtbjNTSpVk/edit?usp=sharing)
 <br>
