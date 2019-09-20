@@ -27,15 +27,18 @@ No installation nesscary you can just go to this link.
 - (future ICEBOX) Stripe payment processing API
 
 ## The Pitch and our Planing 
+slide show to demo the application as a pitch(yes I know its beautiful.)
 [Pitch Presentation](https://docs.google.com/presentation/d/1DNAjXGBXbbPf6wL9p9H0ejlKsjO_Jow6QXtbjNTSpVk/edit?usp=sharing)
 <br>
+Love me a trello with a BG img check out ours hit us up if you want to con tribute.
+
 [Trello](https://trello.com/b/XF41OcI0/airbnb-experiences)
 
-###future plans
--payment processing
--map and location
--improve the nav bar
--improve img uploading flexability for users
+### future plans
+- payment processing
+- map and location
+- improve the nav bar
+- improve img uploading flexability for users
 
 ## License 
 [MIT](https://choosealicense.com/licenses/mit/)
