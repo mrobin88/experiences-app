@@ -28,7 +28,6 @@ Slide show to demo the application as a pitch (yes I know its beautiful.)
 [Pitch Presentation](https://docs.google.com/presentation/d/1DNAjXGBXbbPf6wL9p9H0ejlKsjO_Jow6QXtbjNTSpVk/edit?usp=sharing)
 <br>
 Love me a trello with a BG img check out ours. Hit us up if you want to contribute.
-
 [Trello](https://trello.com/b/XF41OcI0/airbnb-experiences)
 
 ### future plans
