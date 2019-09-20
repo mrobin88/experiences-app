@@ -23,14 +23,20 @@ No installation nesscary you can just go to this link.
 - JavaScript
 - Heroku
 - Unsplash api (for random image generation)
-- (future) Google Places API
-- (future) Stripe payment processing API
+- (future ICEBOX) Google Places API
+- (future ICEBOX) Stripe payment processing API
 
 ## The Pitch and our Planing 
 [Pitch Presentation](https://docs.google.com/presentation/d/1DNAjXGBXbbPf6wL9p9H0ejlKsjO_Jow6QXtbjNTSpVk/edit?usp=sharing)
 <br>
 [Trello](https://trello.com/b/XF41OcI0/airbnb-experiences)
 
-## License
+###future plans
+-payment processing
+-map and location
+-improve the nav bar
+-improve img uploading flexability for users
+
+## License 
 [MIT](https://choosealicense.com/licenses/mit/)
 
