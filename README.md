@@ -9,7 +9,7 @@ Experiences is a Python Django based application for finding activities around v
 
 No installation nesscary you can just go to this link.
 
-[Experiences Application get started here](experiencesapp.herokuapp.com "Experiences app")
+[Experiences Application get started here](https://experiencesapp.herokuapp.com)
 
 ## Technologies Used
 
