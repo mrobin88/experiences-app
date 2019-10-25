@@ -376,7 +376,7 @@ CATEGORIES = (
 #----- PROFILE ------
 class Profile(models.Model):
     user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    url = models.CharField(max_length=200)
 
     def __str__(self):
         return f'{self.user.username} Profile'
@@ -440,5 +440,3 @@ class Photo(models.Model):
 
     def __str__(self):
         return f"Photo for exp_id: {self.experience_id} @{self.url} ({self.id})"
-
-        

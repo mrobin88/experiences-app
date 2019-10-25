@@ -25,11 +25,6 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
 
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['image']
-
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
