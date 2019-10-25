@@ -10,8 +10,8 @@
                 <div class="user-profile-card">
                     <div class="user-profile-header">
                         <div class="user-profile-avatar text-center">
-                            {% if user.profile.image.url %}
-                                <img style="border-radius:50%;" alt="avatar" src="{{ review.user.profile.image.url }}">
+                            {% if user.profile.url %}
+                                <img style="border-radius:50%;" alt="avatar" src="{{ review.user.profile.url }}">
                             {% else %}
                                 <img alt="avatar" src="/media/profile_pics/default.jpg">
                             {% endif %}

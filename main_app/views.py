@@ -12,7 +12,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import uuid
 import boto3
 from .models import Experience, Profile, Booking, Review, Photo
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, BookingForm
+from .forms import UserRegisterForm, UserUpdateForm, BookingForm
 import os
 from unsplash_search import UnsplashSearch
 
@@ -47,17 +47,23 @@ def signup(request):
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-
-        if u_form.is_valid() and p_form.is_valid():
+        photo_file = request.FILES.get('photo-file', None)
+        if u_form.is_valid() and photo_file:
             u_form.save()
-            p_form.save()
+            s3 = boto3.client('s3')
+            key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+            try:
+                s3.upload_fileobj(photo_file, BUCKET, key)
+                url = f"{S3_BASE_URL}{BUCKET}/{key}"
+                profile = Profile(url=url, user_id=request.user.id)
+                profile.save()
+            except:
+                print('An error occurred uploading file to S3')
             messages.success(request, f'Your account has been created')
             return redirect('profile')
 
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     experiences = Experience.objects.filter(user_id=request.user.id)
     for experience in experiences:
@@ -91,7 +97,6 @@ def profile(request):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form,
         'bookings': bookings,
         'experiences': experiences,
     }

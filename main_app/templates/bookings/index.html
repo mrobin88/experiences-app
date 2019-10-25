@@ -52,8 +52,8 @@
                     <a href="{% url 'exp_detail' booking.experience.id %}">
                         <div class="card-body d-flex flex-row">
                             <!-- Avatar -->
-                            {% if booking.experience.user.profile.image.url %}
-                            <img src="{{ booking.experience.user.profile.image.url }}" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
+                            {% if booking.experience.user.profile.url %}
+                            <img src="{{ booking.experience.user.profile.url }}" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
                             {% else %}
                             <img src="/media/profile_pics/default.jpg" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
                             {% endif %}
