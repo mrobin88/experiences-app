@@ -1,0 +1,394 @@
+section{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+header {
+    position: relative;
+    background-color: black;
+    height: 50vh;
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+h1{
+    font-family: 'Satisfy', cursive;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+header video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+header .container {
+    position: relative;
+    z-index: 2;
+}
+
+header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+@media (pointer: coarse) and (hover: none) {
+    header {
+    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+    }
+    header video {
+    display: none;
+    }
+}
+
+/*--------------NAVBAR-------------------*/
+.navbar-custom {
+    background-color: #ff5500;
+}
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+}
+
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+/* for dropdown only - change the color of droodown */
+.navbar-custom .dropdown-menu {
+    background-color: #ff5500;
+}
+.navbar-custom .dropdown-item {
+    color: #ffffff;
+}
+.navbar-custom .dropdown-item:hover,
+.navbar-custom .dropdown-item:focus {
+    color: #333333;
+    background-color: rgba(255,255,255,.5);
+}
+
+/*---------LIST EXPERIENCES-------------*/
+.collapse-content .fa.fa-heart:hover {
+    color: #f44336 !important;
+}
+
+.collapse-content .fa.fa-share-alt:hover {
+    color: #0d47a1 !important;
+}
+
+/*---------SIGN UP FORMS------------*/
+.bg {
+    border: 1px solid gray;
+    margin: auto;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+#bg {
+    border: 1px solid gray;
+    margin: auto;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+:root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: 0.75rem;
+}
+
+.login,
+.image {
+    min-height: 100vh;
+}
+
+.bg-image {
+    background-image: url('https://images.pexels.com/photos/2819546/pexels-photo-2819546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    background-size: auto;
+    background-position: center;
+}
+
+.login-heading {
+    font-weight: 300;
+}
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+}
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-label-group>input,
+.form-label-group>label {
+    padding: var(--input-padding-y) var(--input-padding-x);
+    height: auto;
+    border-radius: 2rem;
+}
+
+.form-label-group>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    cursor: text;
+    /* Match the input under the label */
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::placeholder {
+    color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+    padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown)~label {
+    padding-top: calc(var(--input-padding-y) / 3);
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    font-size: 12px;
+    color: #777;
+}
+
+/* Fallback for Edge
+-------------------------------------------------- */
+
+@supports (-ms-ime-align: auto) {
+    .form-label-group>label {
+        display: none;
+    }
+    .form-label-group input::-ms-input-placeholder {
+        color: #777;
+    }
+}
+
+/* Fallback for IE
+-------------------------------------------------- */
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+    .form-label-group>label {
+        display: none;
+    }
+    .form-label-group input:-ms-input-placeholder {
+        color: #777;
+    }
+}
+
+/*------PROFILE---------*/
+
+.user-profile-card .user-profile-avatar img {
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.user-profile small {
+    display: block;
+    line-height: 1.428571429;
+    color: #999;
+}
+
+/*------ CAROUSEL ---------*/
+.blog .carousel-indicators {
+	left: 0;
+	top: auto;
+    bottom: -40px;
+
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+    background: #a3a3a3;
+    border-radius: 50%;
+    width: 30px;
+    height: 8px;
+    padding:40px;
+}
+
+.blog .carousel-indicators .active {
+background: #707070;
+}
+
+
+/*------HEADER BOOKING ------*/
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:500);
+
+:root {
+	/* Border color variable */
+	--border-color: #e70;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+
+h1 {
+	font-size: 4rem;
+}
+
+h2 {
+	font-size: 2rem;
+	margin-bottom: 2.5rem;
+}
+
+.cube-container {
+	position: relative;
+	width: 30rem;
+	height: 30rem;
+	margin: 5rem auto 6rem;
+	perspective: 100rem;
+}
+
+.cube {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+	transition: transform 1s cubic-bezier(0.32, 0.05, 0.35, 1.6);
+}
+
+.cube-face-image {
+	display: block;
+	position: absolute;
+	/* opacity: 0.95; */
+	/* border: 0.2rem solid #fafafa; */
+	box-shadow: 0 0 0.5rem #fff, 
+				0 0 1.5rem var(--border-color),
+				0 0 3rem var(--border-color);
+}
+
+.image-buttons {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	grid-gap: 1.5rem;
+	justify-content: center;
+}
+
+.image-buttons input {
+	border: 0.2rem solid #fafafa;
+}
+
+.image-buttons input:focus {
+	outline: none;
+	border: 0.2rem solid var(--border-color);
+}
+
+/* Transform images to create cube */
+
+.image-1 {
+	transform: translateZ(15rem);
+}
+
+.image-2 {
+	transform: rotateX(-180deg) translateZ(15rem);
+}
+
+.image-3 {
+	transform: rotateY(90deg) translateZ(15rem);
+}
+
+.image-4 {
+	transform: rotateY(-90deg) translateZ(15rem);
+}
+
+.image-5 {
+	transform: rotateX(90deg) translateZ(15rem);
+}
+
+.image-6 {
+	transform: rotateX(-90deg) translateZ(15rem);
+}
+
+/* Transform cube to show correct image */
+
+.cube.initial-position {
+	transform: translateZ(-15rem) translateY(-2rem) rotateX(-15deg) rotateY(18deg) rotateZ(2deg);
+}
+
+.cube.show-image-1 {
+	transform: translateZ(-15rem);
+}
+
+.cube.show-image-2 {
+	transform: translateZ(-15rem) rotateX(180deg);
+}
+
+.cube.show-image-3 {
+	transform: translateZ(-15rem) rotateY(-90deg);
+}
+
+.cube.show-image-4 {
+	transform: translateZ(-15rem) rotateY(90deg);
+}
+
+.cube.show-image-5 {
+	transform: translateZ(-15rem) rotateX(-90deg);
+}
+
+.cube.show-image-6 {
+	transform: translateZ(-15rem) rotateX(90deg);
+}
+

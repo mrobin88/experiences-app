@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="view" style="background-image: url('https://images.pexels.com/photos/1842623/pexels-photo-1842623.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+    
+    <div class="container"> 
+        <h1 style ="text-align:center; color:white;">Sign Up</h1>
+        <div class="row" style="padding-bottom: 30px;">
+            {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
+            <form style="background-color: rgba(7, 7, 7, 0.3);" class="bg" method="post" action="{% url 'signup' %}">
+                {% csrf_token %}
+                <div style="color: white">
+                    {{ form.username|as_crispy_field}}
+                </div>
+                <div style="color: white" class="form-row">
+                    <div  class="form-group col-md-6 mb-0">
+                        {{ form.first_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.last_name|as_crispy_field }}
+                    </div>
+                </div>
+                <div style="color: white">
+                    {{ form.email|as_crispy_field }}
+                </div>
+                <div style="color: white" class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.password1|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.password2|as_crispy_field }}
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-info btn-light" type="submit">
+                    Sign Up
+                </button> 
+                <div >
+                    <small  class="text-muted">
+                        Already Have An Account? <a style="color: white" class="ml-2" href="{% url 'login' %}">Sign In</a>
+                    </small>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

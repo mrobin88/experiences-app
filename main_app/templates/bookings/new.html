@@ -1,0 +1,29 @@
+{% extends 'new_booking_base.html' %}
+
+{% block content %}
+<div class="container" style="border: 1px solid gray; border-radius: 3px; margin:30px auto; padding:30px;"> 
+    <h1 style="color: black">Add Booking</h1>
+
+    {% if request.user.id != experience.user.id %}
+    <form action="{% url 'bkng_create' experience.id %}" method="POST">
+        {% csrf_token %}
+        {{ booking_form.as_p }}
+        <p>Price: <span class="teal-text">${{ experience.price }}</span></p>
+        <p>Confirm Booking for <span class="teal-text">{{ experience.title }}</span> hosted by <span class="teal-text">{{ experience.user.username.capitalize }}</span>?</p>
+        <input type="submit" value="Submit!" class="btn">
+        <a href="{% url 'exp_detail' experience.id %}">Cancel</a>
+    </form>
+</div>
+<script>
+    var dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+</script>
+{% else %}
+<a href="{% url 'exp_detail' experience.id %}"><p style="color:red; padding-bottom: 50px; text-align: center">You don't need to book your own experience!</p></a>
+{% endif %}
+{% endblock %}

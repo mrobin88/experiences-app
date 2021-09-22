@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if experience.user.id == request.user.id %}
+<h1 style="color: #212529">Delete Experience</h1>
+
+<h4>Are you sure you want to delete <span class="teal-text">{{ object.title }}</span>?</h4>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes - Delete!" class="btn">
+    <a href="{% url 'exp_detail' experience.id %}">Cancel</a>
+</form>
+{% else %}
+<a href="{% url 'exp_detail' experience.id %}"><p style="color:red; padding-top: 15px; text-align: center">You cannot delete {{ experience.user.username.capitalize }}'s experience!</p></a>
+{% endif %}
+{% endblock %}
